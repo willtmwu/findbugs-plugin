@@ -14,7 +14,7 @@ import org.kohsuke.stapler.export.ExportedBean;
  *
  * @author William Wu
  */
-@Extension
+@ExportedBean
 public class AbstractAuditAction implements Action {
 
     @Override
