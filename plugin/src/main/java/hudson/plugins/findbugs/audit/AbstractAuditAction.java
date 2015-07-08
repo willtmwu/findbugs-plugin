@@ -15,9 +15,9 @@ import org.kohsuke.stapler.export.ExportedBean;
  * @author William Wu
  */
 @Extension
-public class AbstractAuditAction implements RootAction {
+public class AbstractAuditAction implements Action {
 
-    //@Override
+    @Override
     public String getIconFileName() {
         return "testAudit";
     }
@@ -27,7 +27,7 @@ public class AbstractAuditAction implements RootAction {
         return "testAudit";
     }
 
-    //@Override
+    @Override
     public String getUrlName() {
         return "testAudit";
     }
