@@ -1,5 +1,8 @@
 package hudson.plugins.findbugs.audit;
 
+import hudson.model.ModelObject;
+import org.kohsuke.stapler.export.ExportedBean;
+
 /**
  * A project action displays a link on the side panel of a project.
  *
@@ -7,7 +10,12 @@ package hudson.plugins.findbugs.audit;
  *
  * @author William Wu
  */
-public class AuditView {
+@ExportedBean
+public class AuditView implements ModelObject{
 
 
+    @Override
+    public String getDisplayName() {
+        return "Auditing Test";
+    }
 }
