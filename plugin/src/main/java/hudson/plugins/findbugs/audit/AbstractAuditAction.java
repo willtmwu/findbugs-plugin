@@ -1,7 +1,9 @@
 package hudson.plugins.findbugs.audit;
 
+import hudson.Extension;
 import hudson.model.Action;
 import hudson.model.ModelObject;
+import hudson.model.RootAction;
 import org.kohsuke.stapler.export.Exported;
 import org.kohsuke.stapler.export.ExportedBean;
 
@@ -12,8 +14,8 @@ import org.kohsuke.stapler.export.ExportedBean;
  *
  * @author William Wu
  */
-@ExportedBean
-public class AbstractAuditAction implements ModelObject {
+@Extension
+public class AbstractAuditAction implements RootAction {
 
     //@Override
     public String getIconFileName() {
