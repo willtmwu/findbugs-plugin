@@ -27,13 +27,17 @@ public class AuditPublisher extends Publisher {
         build.addAction(new AuditAction(build));
 
         //Jenkins.getInstance()
+        listener.getLogger().print("HAHAHAHAHA!!!!");
+
 
         return true;
     }
 
+
+
     @Override
     public Descriptor<Publisher> getDescriptor() {
-        return new DescriptorImpl();
+        return (new DescriptorImpl());
     }
 
     @Extension
@@ -41,7 +45,7 @@ public class AuditPublisher extends Publisher {
 
         @Override
         public String getDisplayName() {
-            return "Publisher Desciptor";
+            return "Publisher Descriptor";
         }
     }
 }
