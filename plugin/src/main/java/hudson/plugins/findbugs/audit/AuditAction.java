@@ -23,12 +23,12 @@ public class AuditAction implements Action{
 
     @Override
     public String getIconFileName() {
-        return null;
+        return "test";
     }
 
     @Override
     public String getDisplayName() {
-        return "Findbugs Auditing";
+        return "Findbugs-Auditing";
     }
 
     @Override

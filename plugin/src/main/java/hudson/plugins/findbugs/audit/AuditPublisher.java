@@ -50,7 +50,7 @@ public class AuditPublisher extends Publisher {
     public static class DescriptorImpl extends Descriptor<Publisher> {
         @Override
         public String getDisplayName() {
-            return "Publisher Descriptor";
+            return "Audit Findbugs Results";
         }
     }
 }
