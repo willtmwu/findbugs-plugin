@@ -9,6 +9,7 @@ import hudson.model.Hudson;
 import hudson.tasks.BuildStepMonitor;
 import hudson.tasks.Publisher;
 import jenkins.model.Jenkins;
+import org.kohsuke.stapler.DataBoundConstructor;
 
 import java.io.IOException;
 
@@ -17,6 +18,10 @@ import java.io.IOException;
  */
 
 public class AuditPublisher extends Publisher {
+
+    @DataBoundConstructor
+    public AuditPublisher() {
+    }
 
     @Override
     public BuildStepMonitor getRequiredMonitorService() {
@@ -43,7 +48,6 @@ public class AuditPublisher extends Publisher {
 
     @Extension
     public static class DescriptorImpl extends Descriptor<Publisher> {
-
         @Override
         public String getDisplayName() {
             return "Publisher Descriptor";

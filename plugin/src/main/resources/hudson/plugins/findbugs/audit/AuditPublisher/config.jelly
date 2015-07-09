@@ -1,6 +1,5 @@
 <?jelly escape-by-default='true'?>
-<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define" xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form" 
-  xmlns:sl="/hudson/plugins/sidebar_link">
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define" xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form">
   <f:section title="${%Findbugs Auditing}">
     <!--<f:entry title="${%Sidebar Links}" description="${%List of extra links for Jenkins main pages and view tabs}">
       <sl:links links="${it.links}"/>
