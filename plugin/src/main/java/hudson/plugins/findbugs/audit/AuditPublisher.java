@@ -31,9 +31,13 @@ public class AuditPublisher extends Publisher {
         return true;
     }
 
+    @Override
+    public Descriptor<Publisher> getDescriptor() {
+        return new DescriptorImpl();
+    }
+
     @Extension
     public static class DescriptorImpl extends Descriptor<Publisher> {
-
 
         @Override
         public String getDisplayName() {
