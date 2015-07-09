@@ -1,12 +1,15 @@
 package hudson.plugins.findbugs.audit;
 
+import hudson.Extension;
+import hudson.Plugin;
 import hudson.model.AbstractBuild;
 import hudson.model.Action;
 
 /**
  * Created by William on 9/07/2015.
  */
-public class AuditAction implements Action{
+@Extension(ordinal = 100)
+public class AuditAction extends Plugin implements Action{
     AbstractBuild<?,?> build;
 
     public AuditAction(AbstractBuild<?,?> build){
