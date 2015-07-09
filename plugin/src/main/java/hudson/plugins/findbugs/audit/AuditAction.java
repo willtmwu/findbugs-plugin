@@ -4,15 +4,17 @@ import hudson.Extension;
 import hudson.Plugin;
 import hudson.model.AbstractBuild;
 import hudson.model.Action;
+import hudson.model.Hudson;
+import org.kohsuke.stapler.DataBoundConstructor;
 
 /**
  * Created by William on 9/07/2015.
  */
-@Extension(ordinal = 100)
-public class AuditAction extends Plugin implements Action{
+public class AuditAction implements Action{
     AbstractBuild<?,?> build;
 
     public AuditAction(){
+        this.build = null;
     }
 
     public AuditAction(AbstractBuild<?,?> build){
