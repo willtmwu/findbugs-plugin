@@ -15,6 +15,7 @@ import java.io.IOException;
 /**
  * Created by William on 9/07/2015.
  */
+
 public class AuditPublisher extends Publisher {
 
     @Override
@@ -24,12 +25,12 @@ public class AuditPublisher extends Publisher {
 
     @Override
     public boolean perform(AbstractBuild<?, ?> build, Launcher launcher, BuildListener listener) throws InterruptedException, IOException {
-        build.addAction(new AuditAction(build));
+
 
         //Jenkins.getInstance()
         listener.getLogger().print("HAHAHAHAHA!!!!");
 
-
+        build.addAction(new AuditAction(build));
         return true;
     }
 
