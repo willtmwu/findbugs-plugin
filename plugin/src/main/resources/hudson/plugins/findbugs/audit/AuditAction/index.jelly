@@ -1,0 +1,9 @@
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define" xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form" xmlns:i="jelly:fmt" xmlns:p="/lib/hudson/project">
+    <l:layout norefresh="true">
+        <st:include it="${it.build}" page="sidepanel.jelly" />
+        <l:main-panel>
+            <!--<f:validateButton title="${%Restart Jenkins}" progress="${%Restarting...}" method="JksRestart" with="" />-->
+            <h1>NEW AUDIT ACTION CHECK HEADER</h1>
+        </l:main-panel>
+    </l:layout>
+</j:jelly>
