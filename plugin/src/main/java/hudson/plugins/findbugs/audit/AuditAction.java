@@ -12,6 +12,9 @@ import hudson.model.Action;
 public class AuditAction extends Plugin implements Action{
     AbstractBuild<?,?> build;
 
+    public AuditAction(){
+    }
+
     public AuditAction(AbstractBuild<?,?> build){
         this.build = build;
     }
