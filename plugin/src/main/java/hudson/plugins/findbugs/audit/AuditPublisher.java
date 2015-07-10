@@ -35,7 +35,8 @@ public class AuditPublisher extends Publisher {
         //Jenkins.getInstance()
         listener.getLogger().print("HAHAHAHAHA!!!!");
 
-        build.addAction(new AuditAction(build));
+        //build.addAction(new AuditAction(build));
+        Jenkins.getInstance().getActions().add(new AuditAction(build));
         return true;
     }
 
