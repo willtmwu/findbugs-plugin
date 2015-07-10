@@ -5,13 +5,15 @@ import hudson.Plugin;
 import hudson.model.AbstractBuild;
 import hudson.model.Action;
 import hudson.model.Hudson;
+import hudson.plugins.findbugs.FindBugsAudit;
 import org.kohsuke.stapler.DataBoundConstructor;
 
 /**
  * Created by William on 9/07/2015.
  */
 public class AuditAction implements Action{
-    AbstractBuild<?,?> build;
+    private AbstractBuild<?,?> build;
+    private FindBugsAudit auditView;
 
     public AuditAction(){
         this.build = null;
@@ -19,6 +21,7 @@ public class AuditAction implements Action{
 
     public AuditAction(AbstractBuild<?,?> build){
         this.build = build;
+        this.auditView = new FindBugsAudit(build);
     }
 
     @Override
@@ -33,7 +36,7 @@ public class AuditAction implements Action{
 
     @Override
     public String getUrlName() {
-        return "findbugsResult";
+        return "findbugsAudit";
     }
 
     public AbstractBuild<?, ?> getBuild() {
