@@ -1,12 +1,7 @@
 package hudson.plugins.findbugs.audit;
 
-import hudson.Extension;
-import hudson.Plugin;
 import hudson.model.AbstractBuild;
 import hudson.model.Action;
-import hudson.model.Hudson;
-import hudson.plugins.findbugs.FindBugsAudit;
-import org.kohsuke.stapler.DataBoundConstructor;
 import org.kohsuke.stapler.StaplerProxy;
 
 /**
