@@ -7,7 +7,7 @@
         alert("HELP!!");
       }
     </script>
-    <st:include it="${it.getBuild}" page="sidepanel.jelly" />
+    <st:include it="${it.build}" page="sidepanel.jelly" />
     <l:main-panel>
 
       <h1>${%FindBugs Auditing}</h1>
