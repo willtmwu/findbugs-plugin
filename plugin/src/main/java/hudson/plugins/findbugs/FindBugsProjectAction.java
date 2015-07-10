@@ -53,7 +53,7 @@ public class FindBugsProjectAction extends AbstractProjectAction<ResultAction<Fi
     @Override
     public ResultAction<?> getLastAction() {
         ResultAction<FindBugsResult> fbr = (ResultAction<FindBugsResult>) super.getLastAction();
-        fbr.getResult().rmSingleNum();
+        //fbr.getResult().rmSingleNum();
         return fbr;
     }
 
