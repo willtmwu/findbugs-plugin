@@ -32,12 +32,11 @@ public class AuditPublisher extends Publisher {
     public boolean perform(AbstractBuild<?, ?> build, Launcher launcher, BuildListener listener) throws InterruptedException, IOException {
         listener.getLogger().println("Setuping Up Auditing Process...");
 
-        build.addAction(new AuditAction(build));
+        //build.addAction(new AuditAction(build));
+        build.getProject().addAction(new AuditAction(build));
         //Jenkins.getInstance().getActions().add(new AuditAction(build));
         return true;
     }
-
-
 
     @Override
     public Descriptor<Publisher> getDescriptor() {
