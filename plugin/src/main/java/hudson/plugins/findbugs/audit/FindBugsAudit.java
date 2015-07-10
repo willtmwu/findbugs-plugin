@@ -10,7 +10,6 @@ import java.io.Serializable;
  */
 public class FindBugsAudit implements ModelObject, Serializable{
 
-
     private AbstractBuild<?,?> build;
 
     public FindBugsAudit(AbstractBuild<?,?> build){

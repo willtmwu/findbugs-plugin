@@ -2,22 +2,22 @@ package hudson.plugins.findbugs.audit;
 
 import hudson.Extension;
 import hudson.Launcher;
-import hudson.model.AbstractBuild;
-import hudson.model.BuildListener;
-import hudson.model.Descriptor;
-import hudson.model.Hudson;
+import hudson.model.*;
 import hudson.tasks.BuildStepMonitor;
+import hudson.tasks.Builder;
 import hudson.tasks.Publisher;
 import jenkins.model.Jenkins;
 import org.kohsuke.stapler.DataBoundConstructor;
 
 import java.io.IOException;
+import java.util.Collection;
+import java.util.List;
 
 /**
  * Created by William on 9/07/2015.
  */
 
-public class AuditPublisher extends Publisher {
+public class AuditPublisher extends Publisher{
 
     @DataBoundConstructor
     public AuditPublisher() {
@@ -32,10 +32,22 @@ public class AuditPublisher extends Publisher {
     public boolean perform(AbstractBuild<?, ?> build, Launcher launcher, BuildListener listener) throws InterruptedException, IOException {
         listener.getLogger().println("Setuping Up Auditing Process...");
 
-        //build.addAction(new AuditAction(build));
-        build.getProject().addAction(new AuditAction(build));
-        //Jenkins.getInstance().getActions().add(new AuditAction(build));
+        // Adds to only the build itself
+        build.addAction(new AuditAction(build));
+
+        //Think this adds to root?
+        Jenkins.getInstance().getActions().add(new AuditAction(build));
+
         return true;
+    }
+
+    @Override
+    public Collection<? extends Action> getProjectActions(AbstractProject<?, ?> project) {
+        //super.getProjectActions(project);
+        List<Action> actions = new ArrayList<>();
+        actions.add(new AuditAction(build));
+
+        return actions;
     }
 
     @Override
