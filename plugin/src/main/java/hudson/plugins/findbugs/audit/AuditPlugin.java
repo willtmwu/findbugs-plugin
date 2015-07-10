@@ -20,6 +20,7 @@ import org.kohsuke.stapler.StaplerResponse;
  */
 public class AuditPlugin {
 
+    //Not needed  class anymore
     private AuditAction auditAction = new AuditAction();
 
     /*@Override public void start() throws Exception {

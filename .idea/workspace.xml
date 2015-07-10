@@ -361,11 +361,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.jelly" pinned="false" current-in-tab="false">
+      <file leaf-file-name="index.jelly" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/plugin/src/main/resources/hudson/plugins/findbugs/audit/FindBugsAudit/index.jelly">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.17075893">
+              <caret line="9" column="66" selection-start-line="9" selection-start-column="66" selection-end-line="9" selection-end-column="66" />
               <folding />
             </state>
           </provider>
@@ -393,31 +393,31 @@
         <entry file="file://$PROJECT_DIR$/plugin/src/main/java/hudson/plugins/findbugs/audit/AuditAction.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="10" column="4" selection-start-line="10" selection-start-column="4" selection-end-line="10" selection-end-column="37" />
+              <caret line="9" column="57" selection-start-line="9" selection-start-column="57" selection-end-line="9" selection-end-column="57" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#347#348#0" expanded="true" />
-                <element signature="e#380#381#0" expanded="true" />
-                <element signature="e#569#570#0" expanded="true" />
-                <element signature="e#635#636#0" expanded="true" />
-                <element signature="e#687#688#0" expanded="true" />
-                <element signature="e#729#730#0" expanded="true" />
-                <element signature="e#777#778#0" expanded="true" />
-                <element signature="e#815#816#0" expanded="true" />
-                <element signature="e#860#861#0" expanded="true" />
-                <element signature="e#893#894#0" expanded="true" />
-                <element signature="e#946#947#0" expanded="true" />
-                <element signature="e#983#984#0" expanded="true" />
+                <element signature="e#348#349#0" expanded="true" />
+                <element signature="e#381#382#0" expanded="true" />
+                <element signature="e#570#571#0" expanded="true" />
+                <element signature="e#636#637#0" expanded="true" />
+                <element signature="e#688#689#0" expanded="true" />
+                <element signature="e#730#731#0" expanded="true" />
+                <element signature="e#778#779#0" expanded="true" />
+                <element signature="e#816#817#0" expanded="true" />
+                <element signature="e#861#862#0" expanded="true" />
+                <element signature="e#894#895#0" expanded="true" />
+                <element signature="e#947#948#0" expanded="true" />
+                <element signature="e#984#985#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AuditPublisher.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="AuditPublisher.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/plugin/src/main/java/hudson/plugins/findbugs/audit/AuditPublisher.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.78994614">
-              <caret line="59" column="40" selection-start-line="59" selection-start-column="40" selection-end-line="59" selection-end-column="40" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="64" column="38" selection-start-line="64" selection-start-column="38" selection-end-line="64" selection-end-column="38" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#664#665#0" expanded="true" />
@@ -456,16 +456,16 @@
         <option value="$PROJECT_DIR$/plugin/src/main/java/hudson/plugins/findbugs/audit/AuditView.java" />
         <option value="$PROJECT_DIR$/plugin/src/main/resources/hudson/plugins/findbugs/audit/AuditAction/index.jelly" />
         <option value="$PROJECT_DIR$/plugin/src/main/java/hudson/plugins/findbugs/audit/AbstractAuditAction.java" />
-        <option value="$PROJECT_DIR$/plugin/src/main/java/hudson/plugins/findbugs/audit/AuditPlugin.java" />
         <option value="$PROJECT_DIR$/plugin/src/main/resources/hudson/plugins/findbugs/audit/AuditPublisher/config.jelly" />
         <option value="$PROJECT_DIR$/plugin/src/main/java/hudson/plugins/findbugs/FindBugsResult.java" />
         <option value="$PROJECT_DIR$/plugin/src/main/java/hudson/plugins/findbugs/FindBugsProjectAction.java" />
         <option value="$PROJECT_DIR$/plugin/src/main/java/hudson/plugins/findbugs/FindBugsAudit.java" />
-        <option value="$PROJECT_DIR$/plugin/src/main/java/hudson/plugins/findbugs/audit/AuditAction.java" />
         <option value="$PROJECT_DIR$/plugin/src/main/resources/hudson/plugins/findbugs/FindBugsAudit/index.jelly" />
         <option value="$PROJECT_DIR$/plugin/src/main/java/hudson/plugins/findbugs/audit/FindBugsAudit.java" />
-        <option value="$PROJECT_DIR$/plugin/src/main/resources/hudson/plugins/findbugs/audit/FindBugsAudit/index.jelly" />
         <option value="$PROJECT_DIR$/plugin/src/main/java/hudson/plugins/findbugs/audit/AuditPublisher.java" />
+        <option value="$PROJECT_DIR$/plugin/src/main/java/hudson/plugins/findbugs/audit/AuditAction.java" />
+        <option value="$PROJECT_DIR$/plugin/src/main/java/hudson/plugins/findbugs/audit/AuditPlugin.java" />
+        <option value="$PROJECT_DIR$/plugin/src/main/resources/hudson/plugins/findbugs/audit/FindBugsAudit/index.jelly" />
       </list>
     </option>
   </component>
@@ -711,44 +711,6 @@
               <option name="myItemId" value="audit" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="FindBugsAudit" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="findbugs-plugin" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="findbugs-plugin" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="plugin" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="resources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="findbugs" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="audit" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -777,40 +739,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="findbugs" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="findbugs-plugin" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="findbugs-plugin" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="plugin" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="findbugs" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="parser" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1122,13 +1050,13 @@
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.22077923" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.15565032" sideWeight="0.5" order="3" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.21375267" sideWeight="0.5" order="3" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.46212122" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.36688313" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.17532468" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Code Iris" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="6" side_tool="false" content_ui="combo" />
@@ -1412,14 +1340,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/plugin/src/main/java/hudson/plugins/findbugs/audit/AuditPlugin.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.36049107">
-          <caret line="32" column="7" selection-start-line="32" selection-start-column="7" selection-end-line="32" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/plugin/src/main/resources/hudson/plugins/findbugs/LICENSE.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1482,14 +1402,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/plugin/src/main/java/hudson/plugins/findbugs/FindBugsDescriptor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="24" column="7" selection-start-line="24" selection-start-column="7" selection-end-line="24" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/org/jenkins-ci/main/jenkins-core/1.554.3/jenkins-core-1.554.3-sources.jar!/hudson/model/Actionable.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.3325893">
@@ -1502,30 +1414,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.2845982">
           <caret line="44" column="60" selection-start-line="44" selection-start-column="60" selection-end-line="44" selection-end-column="60" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/plugin/src/main/java/hudson/plugins/findbugs/audit/FindBugsAudit.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#339#340#0" expanded="true" />
-            <element signature="e#373#374#0" expanded="true" />
-            <element signature="e#425#426#0" expanded="true" />
-            <element signature="e#472#473#0" expanded="true" />
-            <element signature="e#517#518#0" expanded="true" />
-            <element signature="e#550#551#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/plugin/src/main/resources/hudson/plugins/findbugs/audit/FindBugsAudit/index.jelly">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1571,45 +1459,29 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/plugin/src/main/java/hudson/plugins/findbugs/audit/AuditAction.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="10" column="4" selection-start-line="10" selection-start-column="4" selection-end-line="10" selection-end-column="37" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#347#348#0" expanded="true" />
-            <element signature="e#380#381#0" expanded="true" />
-            <element signature="e#569#570#0" expanded="true" />
-            <element signature="e#635#636#0" expanded="true" />
-            <element signature="e#687#688#0" expanded="true" />
-            <element signature="e#729#730#0" expanded="true" />
-            <element signature="e#777#778#0" expanded="true" />
-            <element signature="e#815#816#0" expanded="true" />
-            <element signature="e#860#861#0" expanded="true" />
-            <element signature="e#893#894#0" expanded="true" />
-            <element signature="e#946#947#0" expanded="true" />
-            <element signature="e#983#984#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/plugin/src/main/java/hudson/plugins/findbugs/FindBugsPublisher.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.2413793">
-          <caret line="182" column="4" selection-start-line="182" selection-start-column="4" selection-end-line="185" selection-end-column="5" />
-          <folding>
-            <element signature="e#7627#7628#0" expanded="true" />
-            <element signature="e#7684#7685#0" expanded="true" />
-            <element signature="e#8709#8710#0" expanded="true" />
-            <element signature="e#8773#8774#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/org/jvnet/hudson/plugins/analysis-core/1.73-SNAPSHOT/analysis-core-1.73-SNAPSHOT.jar!/hudson/plugins/analysis/core/AbstractProjectAction.class">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.3490566">
           <caret line="189" column="0" selection-start-line="189" selection-start-column="0" selection-end-line="189" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/jenkins-ci/main/jenkins-core/1.554.3/jenkins-core-1.554.3-sources.jar!/hudson/model/Job.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33213645">
+          <caret line="834" column="16" selection-start-line="834" selection-start-column="16" selection-end-line="834" selection-end-column="16" />
+          <folding>
+            <element signature="e#27158#27159#0" expanded="true" />
+            <element signature="e#27232#27233#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/plugin/src/main/java/hudson/plugins/findbugs/FindBugsDescriptor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="24" column="7" selection-start-line="24" selection-start-column="7" selection-end-line="24" selection-end-column="7" />
           <folding />
         </state>
       </provider>
@@ -1623,17 +1495,6 @@
             <element signature="e#4287#4288#0" expanded="true" />
             <element signature="e#5063#5064#0" expanded="true" />
             <element signature="e#5096#5097#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/jenkins-ci/main/jenkins-core/1.554.3/jenkins-core-1.554.3-sources.jar!/hudson/model/Job.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33213645">
-          <caret line="834" column="16" selection-start-line="834" selection-start-column="16" selection-end-line="834" selection-end-column="16" />
-          <folding>
-            <element signature="e#27158#27159#0" expanded="true" />
-            <element signature="e#27232#27233#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1660,10 +1521,69 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/plugin/src/main/java/hudson/plugins/findbugs/FindBugsPublisher.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-6.2413793">
+          <caret line="182" column="4" selection-start-line="182" selection-start-column="4" selection-end-line="185" selection-end-column="5" />
+          <folding>
+            <element signature="e#7627#7628#0" expanded="true" />
+            <element signature="e#7684#7685#0" expanded="true" />
+            <element signature="e#8709#8710#0" expanded="true" />
+            <element signature="e#8773#8774#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/plugin/src/main/java/hudson/plugins/findbugs/audit/AuditPlugin.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.20435968">
+          <caret line="21" column="4" selection-start-line="21" selection-start-column="4" selection-end-line="21" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/plugin/src/main/java/hudson/plugins/findbugs/audit/AuditAction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="9" column="57" selection-start-line="9" selection-start-column="57" selection-end-line="9" selection-end-column="57" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#348#349#0" expanded="true" />
+            <element signature="e#381#382#0" expanded="true" />
+            <element signature="e#570#571#0" expanded="true" />
+            <element signature="e#636#637#0" expanded="true" />
+            <element signature="e#688#689#0" expanded="true" />
+            <element signature="e#730#731#0" expanded="true" />
+            <element signature="e#778#779#0" expanded="true" />
+            <element signature="e#816#817#0" expanded="true" />
+            <element signature="e#861#862#0" expanded="true" />
+            <element signature="e#894#895#0" expanded="true" />
+            <element signature="e#947#948#0" expanded="true" />
+            <element signature="e#984#985#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/plugin/src/main/java/hudson/plugins/findbugs/audit/FindBugsAudit.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#339#340#0" expanded="true" />
+            <element signature="e#373#374#0" expanded="true" />
+            <element signature="e#425#426#0" expanded="true" />
+            <element signature="e#472#473#0" expanded="true" />
+            <element signature="e#517#518#0" expanded="true" />
+            <element signature="e#550#551#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/plugin/src/main/java/hudson/plugins/findbugs/audit/AuditPublisher.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.78994614">
-          <caret line="59" column="40" selection-start-line="59" selection-start-column="40" selection-end-line="59" selection-end-column="40" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="64" column="38" selection-start-line="64" selection-start-column="38" selection-end-line="64" selection-end-column="38" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#664#665#0" expanded="true" />
@@ -1673,6 +1593,14 @@
             <element signature="e#1974#1975#0" expanded="true" />
             <element signature="e#2029#2030#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/plugin/src/main/resources/hudson/plugins/findbugs/audit/FindBugsAudit/index.jelly">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.17075893">
+          <caret line="9" column="66" selection-start-line="9" selection-start-column="66" selection-end-line="9" selection-end-column="66" />
+          <folding />
         </state>
       </provider>
     </entry>

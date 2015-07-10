@@ -7,7 +7,7 @@ import org.kohsuke.stapler.StaplerProxy;
 /**
  * Created by William on 9/07/2015.
  */
-public class AuditAction implements Action, StaplerProxy{
+public class AuditAction implements Action, StaplerProxy {
     private AbstractBuild<?,?> build;
     private FindBugsAudit auditView;
 
