@@ -34,7 +34,7 @@ public class AuditPublisher extends Publisher{
     @Override
     public boolean perform(AbstractBuild<?, ?> build, Launcher launcher, BuildListener listener) throws InterruptedException, IOException {
         this.build = build;
-        listener.getLogger().println("Setuping Up Auditing Process...");
+        listener.getLogger().println("Setting Up Auditing Process...");
 
         // Adds to only the build itself
         build.addAction(new AuditAction(build));
