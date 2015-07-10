@@ -33,7 +33,7 @@ public class AuditAction implements Action{
 
     @Override
     public String getUrlName() {
-        return "findbugsAudit";
+        return "findbugsResult";
     }
 
     public AbstractBuild<?, ?> getBuild() {
