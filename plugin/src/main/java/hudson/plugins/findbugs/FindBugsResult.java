@@ -141,6 +141,8 @@ public class FindBugsResult extends BuildResult {
         return notInCloud;
     }
 
+
+
     @Override
     protected String getSerializationFileName() {
         return "findbugs-warnings.xml";

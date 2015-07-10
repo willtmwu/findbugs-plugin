@@ -1,5 +1,6 @@
 package hudson.plugins.findbugs;
 
+import edu.umd.cs.findbugs.FindBugs;
 import hudson.model.AbstractProject;
 import hudson.plugins.analysis.core.ResultAction;
 import hudson.plugins.analysis.core.AbstractProjectAction;
@@ -48,5 +49,14 @@ public class FindBugsProjectAction extends AbstractProjectAction<ResultAction<Fi
         list.add(new FindbugsEvaluationsGraph());
         return list;
     }
+
+    @Override
+    public ResultAction<?> getLastAction() {
+        ResultAction<FindBugsResult> fbr = (ResultAction<FindBugsResult>) super.getLastAction();
+        fbr.getResult().rmSingleNum();
+        return fbr;
+    }
+
+
 }
 
