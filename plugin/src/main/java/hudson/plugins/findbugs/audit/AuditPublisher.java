@@ -30,13 +30,10 @@ public class AuditPublisher extends Publisher {
 
     @Override
     public boolean perform(AbstractBuild<?, ?> build, Launcher launcher, BuildListener listener) throws InterruptedException, IOException {
-
-
-        //Jenkins.getInstance()
         listener.getLogger().print("HAHAHAHAHA!!!!");
 
-        //build.addAction(new AuditAction(build));
-        Jenkins.getInstance().getActions().add(new AuditAction(build));
+        build.addAction(new AuditAction(build));
+        //Jenkins.getInstance().getActions().add(new AuditAction(build));
         return true;
     }
 

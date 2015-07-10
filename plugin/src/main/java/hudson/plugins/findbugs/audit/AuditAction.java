@@ -23,17 +23,17 @@ public class AuditAction implements Action{
 
     @Override
     public String getIconFileName() {
-        return "test";
+        return "/plugin/findbugs/icons/findbugs-24x24.png";
     }
 
     @Override
     public String getDisplayName() {
-        return "Findbugs-Auditing";
+        return "Findbugs Auditing";
     }
 
     @Override
     public String getUrlName() {
-        return "findbugs-audit";
+        return "findbugsAudit";
     }
 
     public AbstractBuild<?, ?> getBuild() {
