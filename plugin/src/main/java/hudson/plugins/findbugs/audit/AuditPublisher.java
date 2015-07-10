@@ -10,6 +10,7 @@ import jenkins.model.Jenkins;
 import org.kohsuke.stapler.DataBoundConstructor;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -18,6 +19,8 @@ import java.util.List;
  */
 
 public class AuditPublisher extends Publisher{
+
+    private AbstractBuild<?,?> build;
 
     @DataBoundConstructor
     public AuditPublisher() {
@@ -30,6 +33,7 @@ public class AuditPublisher extends Publisher{
 
     @Override
     public boolean perform(AbstractBuild<?, ?> build, Launcher launcher, BuildListener listener) throws InterruptedException, IOException {
+        this.build = build;
         listener.getLogger().println("Setuping Up Auditing Process...");
 
         // Adds to only the build itself
@@ -44,8 +48,8 @@ public class AuditPublisher extends Publisher{
     @Override
     public Collection<? extends Action> getProjectActions(AbstractProject<?, ?> project) {
         //super.getProjectActions(project);
-        List<Action> actions = new ArrayList<>();
-        actions.add(new AuditAction(build));
+        List<Action> actions = new ArrayList<Action>();
+        actions.add(new AuditAction(this.build));
 
         return actions;
     }
