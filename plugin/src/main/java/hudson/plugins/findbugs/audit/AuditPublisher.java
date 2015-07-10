@@ -56,7 +56,8 @@ public class AuditPublisher extends Publisher{
 
     @Override
     public Action getProjectAction(final AbstractProject<?, ?> project) {
-        return new AuditAction(project.getLastSuccessfulBuild());
+        AbstractBuild<?, ?> lastBuild = project.getLastSuccessfulBuild();
+        return new AuditAction(lastBuild);
     }
 
     @Override
