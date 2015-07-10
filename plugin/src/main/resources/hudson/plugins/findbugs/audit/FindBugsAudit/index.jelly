@@ -4,11 +4,11 @@
   <l:layout norefresh="true">
 
     <st:include it="${it.build}" page="sidepanel.jelly" />
-    <script>
+    <!--<script>
       function myFunction() {
       alert("HELP!! ME!!! F*CK THIS SHIT PROGRAMMING STACK");
       }
-    </script>
+    </script>-->
     <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
     <l:main-panel>
 
