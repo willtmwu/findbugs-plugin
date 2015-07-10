@@ -7,11 +7,12 @@ import hudson.model.Action;
 import hudson.model.Hudson;
 import hudson.plugins.findbugs.FindBugsAudit;
 import org.kohsuke.stapler.DataBoundConstructor;
+import org.kohsuke.stapler.StaplerProxy;
 
 /**
  * Created by William on 9/07/2015.
  */
-public class AuditAction implements Action{
+public class AuditAction implements Action, StaplerProxy{
     private AbstractBuild<?,?> build;
     private FindBugsAudit auditView;
 
@@ -41,5 +42,10 @@ public class AuditAction implements Action{
 
     public AbstractBuild<?, ?> getBuild() {
         return this.build;
+    }
+
+    @Override
+    public final Object getTarget() {
+        return this.auditView;
     }
 }
