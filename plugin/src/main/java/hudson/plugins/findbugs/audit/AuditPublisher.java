@@ -39,19 +39,24 @@ public class AuditPublisher extends Publisher{
         // Adds to only the build itself
         build.addAction(new AuditAction(build));
 
-        //Think this adds to root?
-        Jenkins.getInstance().getActions().add(new AuditAction(build));
+        //This adds to root.... don't need it, right now
+        //Jenkins.getInstance().getActions().add(new AuditAction(build));
 
         return true;
     }
 
-    @Override
+    /*@Override
     public Collection<? extends Action> getProjectActions(AbstractProject<?, ?> project) {
         //super.getProjectActions(project);
         List<Action> actions = new ArrayList<Action>();
         actions.add(new AuditAction(this.build));
 
         return actions;
+    }*/
+
+    @Override
+    public Action getProjectAction(final AbstractProject<?, ?> project) {
+        return new AuditAction(project.getLastSuccessfulBuild());
     }
 
     @Override
