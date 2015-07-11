@@ -42,6 +42,8 @@ public class AuditPublisher extends Publisher{
         //This adds to root.... don't need it, right now
         //Jenkins.getInstance().getActions().add(new AuditAction(build));
 
+        //Need something here to update the project.... :C
+
         return true;
     }
 
@@ -59,6 +61,7 @@ public class AuditPublisher extends Publisher{
         final AbstractBuild<?, ?> lastBuild = project.getLastSuccessfulBuild();
         //return new AuditAction(lastBuild);
 
+        //Only works on plugin startup!!!! :C
         return (new Action() {
             @Override
             public String getIconFileName() {
