@@ -34,7 +34,7 @@ public class AuditPublisher extends Publisher{
     @Override
     public boolean perform(AbstractBuild<?, ?> build, Launcher launcher, BuildListener listener) throws InterruptedException, IOException {
         this.build = build;
-        listener.getLogger().println("Setting Up Auditing Process...");
+        listener.getLogger().println("[FINDBUGS_AUDIT] Setting Up Auditing Process...");
 
         // Adds to only the build itself
         build.addAction(new AuditAction(build));
@@ -42,7 +42,7 @@ public class AuditPublisher extends Publisher{
         //This adds to root.... don't need it, right now
         //Jenkins.getInstance().getActions().add(new AuditAction(build));
 
-        //Need something here to update the project.... :C
+        //TODO Need something here to update the project action.... :C
 
         return true;
     }
@@ -89,7 +89,7 @@ public class AuditPublisher extends Publisher{
     public static class DescriptorImpl extends Descriptor<Publisher> {
         @Override
         public String getDisplayName() {
-            return "Audit Findbugs Results";
+            return "Configure Findbugs Auditing";
         }
     }
 }

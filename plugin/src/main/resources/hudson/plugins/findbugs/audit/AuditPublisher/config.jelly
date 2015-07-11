@@ -1,6 +1,10 @@
 <?jelly escape-by-default='true'?>
 <j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define" xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form">
-  <f:section title="${%Findbugs Auditing}">
+  <!--<f:section title="${%Findbugs Auditing}">-->
+    <f:entry title="${%Audit Cloud URL}" field="pattern"
+             description="Please ensure this is run AFTER the results of FindBugs have been published">
+      <f:textbox />
+    </f:entry>
     <!--<f:entry title="${%Sidebar Links}" description="${%List of extra links for Jenkins main pages and view tabs}">
       <sl:links links="${it.links}"/>
     </f:entry>-->

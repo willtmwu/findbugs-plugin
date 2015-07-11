@@ -16,9 +16,24 @@ public class FindBugsAudit implements ModelObject, Serializable{
         this.build = build;
     }
 
+
+    //Need to test action/buildresult manipulation and filtering. Both here and back in publisher
+    // Here for the view
+    // in publisher for initial filtering
+
+
+
+
+
+
+
+
+
+
+
     @Override
     public String getDisplayName() {
-        return "Findbugs Auditing View";
+        return "Findbugs Auditing";
     }
 
     public AbstractBuild<?, ?> getBuild() {
