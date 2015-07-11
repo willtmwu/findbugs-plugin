@@ -24,4 +24,8 @@ public class FindBugsAudit implements ModelObject, Serializable{
     public AbstractBuild<?, ?> getBuild() {
         return this.build;
     }
+
+    public int getNumber(){
+        return this.build.number;
+    }
 }

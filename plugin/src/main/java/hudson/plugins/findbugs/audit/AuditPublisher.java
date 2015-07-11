@@ -56,8 +56,25 @@ public class AuditPublisher extends Publisher{
 
     @Override
     public Action getProjectAction(final AbstractProject<?, ?> project) {
-        AbstractBuild<?, ?> lastBuild = project.getLastSuccessfulBuild();
-        return new AuditAction(lastBuild);
+        final AbstractBuild<?, ?> lastBuild = project.getLastSuccessfulBuild();
+        //return new AuditAction(lastBuild);
+
+        return (new Action() {
+            @Override
+            public String getIconFileName() {
+                return "/plugin/findbugs/icons/findbugs-24x24.png";
+            }
+
+            @Override
+            public String getDisplayName() {
+                return "Findbugs Auditing";
+            }
+
+            @Override
+            public String getUrlName() {
+                return lastBuild.number + "/findbugsAudit";
+            }
+        });
     }
 
     @Override
