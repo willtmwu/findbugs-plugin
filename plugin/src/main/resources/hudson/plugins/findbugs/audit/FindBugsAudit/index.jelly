@@ -8,8 +8,8 @@
   http://stackoverflow.com/questions/980697/element-dispatchevent-is-not-a-function-js-error-caught-in-firebug-of-ff3-0
   -->
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular.min.js"></script>
+  <st:bind value="${it}" var="backend"/>
   <script type="text/javascript">
-    var backend = <st:bind value="${it}" />
     function systemLogger(message) {
       backend.bindingLogger(message);
     }
