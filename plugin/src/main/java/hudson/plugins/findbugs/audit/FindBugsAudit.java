@@ -43,4 +43,8 @@ public class FindBugsAudit implements ModelObject, Serializable{
     public int getNumber(){
         return this.build.number;
     }
+
+    public void bindingLogger(String message){
+        System.out.println(message);
+    }
 }

@@ -39,29 +39,17 @@ public class AuditPublisher extends Publisher{
         // Adds to only the build itself
         build.addAction(new AuditAction(build));
 
-        //This adds to root.... don't need it, right now
+        //This adds to root.... don't need it
         //Jenkins.getInstance().getActions().add(new AuditAction(build));
 
-        //TODO Need something here to update the project action.... :C
+        // Look at previous action and check if this build has findbugs-warnings.xml
+        // Override and force recalculation of current based on previous
 
         return true;
     }
 
-    /*@Override
-    public Collection<? extends Action> getProjectActions(AbstractProject<?, ?> project) {
-        //super.getProjectActions(project);
-        List<Action> actions = new ArrayList<Action>();
-        actions.add(new AuditAction(this.build));
-
-        return actions;
-    }*/
-
     @Override
     public Action getProjectAction(final AbstractProject<?, ?> project) {
-        final AbstractBuild<?, ?> lastBuild = project.getLastSuccessfulBuild();
-        //return new AuditAction(lastBuild);
-
-        //Only works on plugin startup!!!! :C,  the argument has been finalised
         return (new Action() {
             @Override
             public String getIconFileName() {
