@@ -9,8 +9,13 @@
   -->
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular.min.js"></script>
   <script>
+    var backend = <st:bind value="${it}" />
+    function systemLogger(message) {
+      backend.bindingLogger(message);
+    }
+
     function myFunction() {
-    alert("HELP!! ME!!! F*CK THIS SHIT PROGRAMMING STACK");
+      alert("HELP!! ME!!! F*CK THIS SHIT PROGRAMMING STACK");
     }
   </script>
 
@@ -25,7 +30,7 @@
       <h1>${%FindBugs Auditing}</h1>
       <button onclick="myFunction()">Click me</button>
       <h2>${it.number}</h2>
-      <button onclick="myFunction()">Binding Call</button>
+      <button onclick="systemLogger('Shit Binding')">Binding Call</button>
       <button onclick="myFunction()">Remove Annotation</button>
 
 

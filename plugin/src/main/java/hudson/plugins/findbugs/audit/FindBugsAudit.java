@@ -2,6 +2,7 @@ package hudson.plugins.findbugs.audit;
 
 import hudson.model.AbstractBuild;
 import hudson.model.ModelObject;
+import org.kohsuke.stapler.bind.JavaScriptMethod;
 
 import java.io.Serializable;
 
@@ -44,6 +45,7 @@ public class FindBugsAudit implements ModelObject, Serializable{
         return this.build.number;
     }
 
+    @JavaScriptMethod
     public void bindingLogger(String message){
         System.out.println(message);
     }
