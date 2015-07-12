@@ -11,8 +11,13 @@
   <st:bind value="${it}" var="backend"/>
   <script type="text/javascript">
     function systemLogger(message) {
-      backend.bindingLogger(message);
+      backend.boundLogger(message);
     }
+
+    function updateWarnings(){
+      backend.updateWarnings();
+    }
+
 
     function myFunction() {
       alert("HELP!! ME!!! F*CK THIS SHIT PROGRAMMING STACK");
@@ -31,7 +36,7 @@
       <button onclick="myFunction()">Click me</button>
       <h2>${it.number}</h2>
       <button onclick="systemLogger('Shit Binding')">Binding Call</button>
-      <button onclick="myFunction()">Remove Annotation</button>
+      <button onclick="updateWarnings()">Remove Annotation</button>
 
 
 

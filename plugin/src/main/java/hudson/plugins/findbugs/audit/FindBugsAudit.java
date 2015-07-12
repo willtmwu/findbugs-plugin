@@ -23,6 +23,11 @@ public class FindBugsAudit implements ModelObject, Serializable{
     // in publisher for initial filtering
 
 
+    @JavaScriptMethod
+    public void updateWarnings(){
+        System.out.println("Checking update history: latest " + build.getProject().getLastSuccessfulBuild().number);
+
+    }
 
 
 
@@ -46,7 +51,7 @@ public class FindBugsAudit implements ModelObject, Serializable{
     }
 
     @JavaScriptMethod
-    public void bindingLogger(String message){
+    public void boundLogger(String message){
         System.out.println(message);
     }
 }
