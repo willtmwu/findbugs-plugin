@@ -1,20 +1,21 @@
 <?jelly escape-by-default='true'?>
 <j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define" xmlns:l="/lib/layout"
          xmlns:t="/lib/hudson" xmlns:f="/lib/form" xmlns:i="jelly:fmt" xmlns:result="/result">
-  <l:layout norefresh="true">
 
+  <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script>jQuery.noConflict();</script>
+  <!--Issue was highlighted here
+  http://stackoverflow.com/questions/980697/element-dispatchevent-is-not-a-function-js-error-caught-in-firebug-of-ff3-0
+  -->
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular.min.js"></script>
+  <script>
+    function myFunction() {
+    alert("HELP!! ME!!! F*CK THIS SHIT PROGRAMMING STACK");
+    }
+  </script>
+
+  <l:layout norefresh="true">
     <st:include it="${it.build}" page="sidepanel.jelly" />
-    <script>
-      function myFunction() {
-        alert("HELP!! ME!!! F*CK THIS SHIT PROGRAMMING STACK");
-      }
-    </script>
-    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
-    <script>jQuery.noConflict();</script>
-    <!--Issue was highlighted here
-    http://stackoverflow.com/questions/980697/element-dispatchevent-is-not-a-function-js-error-caught-in-firebug-of-ff3-0
-    -->
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular.min.js"></script>
     <l:main-panel>
 
 
@@ -24,7 +25,8 @@
       <h1>${%FindBugs Auditing}</h1>
       <button onclick="myFunction()">Click me</button>
       <h2>${it.number}</h2>
-
+      <button onclick="myFunction()">Binding Call</button>
+      <button onclick="myFunction()">Remove Annotation</button>
 
 
 
