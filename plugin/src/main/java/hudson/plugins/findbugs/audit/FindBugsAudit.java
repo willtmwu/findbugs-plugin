@@ -40,6 +40,8 @@ public class FindBugsAudit implements ModelObject, Serializable{
         if (index != -1) {
             FindBugsResultAction fbAction = (FindBugsResultAction) build.getAllActions().get(index);
             FindBugsResult fbResult = fbAction.getResult();
+
+
             //Let's start experimentation
             //wonder if I should intercept the parser result and re-clone the BuildResult
             FileAnnotation fileAnnotation = null;
