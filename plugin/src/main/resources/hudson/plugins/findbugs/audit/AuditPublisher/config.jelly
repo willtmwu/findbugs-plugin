@@ -14,5 +14,5 @@
         <a href="${url}" target="_blank">${%Upload image file...}</a>
       </iframe>
     </f:entry>-->
-  </f:section>
+  <!--</f:section>-->
 </j:jelly>
