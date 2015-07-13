@@ -4,6 +4,7 @@ import hudson.model.AbstractBuild;
 import hudson.model.AbstractProject;
 import hudson.model.Action;
 import hudson.model.ModelObject;
+import hudson.plugins.analysis.util.model.FileAnnotation;
 import hudson.plugins.findbugs.FindBugsResult;
 import hudson.plugins.findbugs.FindBugsResultAction;
 import org.kohsuke.stapler.bind.JavaScriptMethod;
@@ -39,8 +40,11 @@ public class FindBugsAudit implements ModelObject, Serializable{
             FindBugsResult fbResult = fbAction.getResult();
             //Let's start experimentation
             //wonder if I should intercept the parser result and re-clone the BuildResult
-            
-            fbResult.removeAnnotation(fbResult.getContainer().getAnnotations().iterator().next());
+            FileAnnotation fileAnnotation = null;
+            for (FileAnnotation fa : fbResult.getAnnotations()) {
+                fileAnnotation = fa;
+            }
+            fbResult.removeAnnotation(fileAnnotation);
 
         }
     }
