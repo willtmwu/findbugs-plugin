@@ -39,8 +39,8 @@ public class FindBugsAudit implements ModelObject, Serializable{
             FindBugsResult fbResult = fbAction.getResult();
             //Let's start experimentation
             //wonder if I should intercept the parser result and re-clone the BuildResult
-
-
+            
+            fbResult.removeAnnotation(fbResult.getContainer().getAnnotations().iterator().next());
 
         }
     }
