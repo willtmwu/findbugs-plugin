@@ -18,10 +18,12 @@ public class FindBugsAudit implements ModelObject, Serializable{
 
     private AbstractBuild<?,?> build;
     private final AbstractProject<?,?> project;
+    private int TEST_SERIALISATION_INTEGER = 0;
 
     public FindBugsAudit(AbstractBuild<?,?> build){
         this.build = build;
         this.project = build.getProject();
+        TEST_SERIALISATION_INTEGER = 10;
     }
 
 
@@ -85,6 +87,7 @@ public class FindBugsAudit implements ModelObject, Serializable{
     @JavaScriptMethod
     public void boundLogger(String message){
         System.out.println(message);
+        TEST_SERIALISATION_INTEGER--;
     }
 
 
