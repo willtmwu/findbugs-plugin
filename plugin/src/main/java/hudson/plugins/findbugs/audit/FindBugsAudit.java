@@ -43,6 +43,7 @@ public class FindBugsAudit implements ModelObject, Serializable{
 
 
             //Let's start experimentation
+            //Graph seems to update on next build
             //wonder if I should intercept the parser result and re-clone the BuildResult
             FileAnnotation fileAnnotation = null;
             for (FileAnnotation fa : fbResult.getAnnotations()) {
