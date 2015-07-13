@@ -1,7 +1,11 @@
 package hudson.plugins.findbugs.audit;
 
 import hudson.model.AbstractBuild;
+import hudson.model.AbstractProject;
+import hudson.model.Action;
 import hudson.model.ModelObject;
+import hudson.plugins.findbugs.FindBugsResult;
+import hudson.plugins.findbugs.FindBugsResultAction;
 import org.kohsuke.stapler.bind.JavaScriptMethod;
 
 import java.io.Serializable;
@@ -12,24 +16,44 @@ import java.io.Serializable;
 public class FindBugsAudit implements ModelObject, Serializable{
 
     private AbstractBuild<?,?> build;
+    private final AbstractProject<?,?> project;
 
     public FindBugsAudit(AbstractBuild<?,?> build){
         this.build = build;
+        this.project = build.getProject();
     }
-
-
-    //Need to test action/buildresult manipulation and filtering. Both here and back in publisher
-    // Here for the view
-    // in publisher for initial filtering
 
 
     @JavaScriptMethod
     public void updateWarnings(){
         System.out.println("Checking update history: latest " + build.getProject().getLastSuccessfulBuild().number);
 
+        //Now let's try forcing remove a single FileAnnotation and persist it into underlying serialisation memory
+        //build.xml and findbugs-warnings.xml
+
+
+        //Current findbugs warning action, same build reference space
+        int index = indexOfFindBugsResultAction();
+        if (index != -1) {
+            FindBugsResultAction fbAction = (FindBugsResultAction) build.getAllActions().get(index);
+            FindBugsResult fbResult = fbAction.getResult();
+            //Let's start experimentation
+            //wonder if I should intercept the parser result and re-clone the BuildResult
+
+
+
+        }
     }
 
 
+    private int indexOfFindBugsResultAction(){
+        for (Action action : this.build.getAllActions()) {
+            if (action instanceof FindBugsResultAction) {
+                return this.build.getAllActions().indexOf(action);
+            }
+        }
+        return -1;
+    }
 
 
 
@@ -50,8 +74,14 @@ public class FindBugsAudit implements ModelObject, Serializable{
         return this.build.number;
     }
 
+    public int getLastSuccessfulBuildNumber(){
+        return build.getProject().getLastSuccessfulBuild().number;
+    }
+
     @JavaScriptMethod
     public void boundLogger(String message){
         System.out.println(message);
     }
+
+
 }

@@ -42,8 +42,8 @@ public class AuditPublisher extends Publisher{
         //This adds to root.... don't need it
         //Jenkins.getInstance().getActions().add(new AuditAction(build));
 
-        // Look at previous action and check if this build has findbugs-warnings.xml
-        // Override and force recalculation of current based on previous
+        // Look at previous audit action and check if this build has findbugs-warnings.xml
+        // Override and force recalculation of current based on previous FP results
 
         return true;
     }

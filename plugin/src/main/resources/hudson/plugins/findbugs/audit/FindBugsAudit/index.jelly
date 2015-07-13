@@ -19,7 +19,7 @@
     }
 
 
-    function myFunction() {
+    function testAlert() {
       alert("HELP!! ME!!! F*CK THIS SHIT PROGRAMMING STACK");
     }
   </script>
@@ -33,9 +33,9 @@
 
 
       <h1>${%FindBugs Auditing}</h1>
-      <button onclick="myFunction()">Click me</button>
+      <button onclick="testAlert()">Click me</button>
       <h2>${it.number}</h2>
-      <button onclick="systemLogger('Shit Binding')">Binding Call</button>
+      <button onclick="systemLogger('Bound Call')">Binding Call</button>
       <button onclick="updateWarnings()">Remove Annotation</button>
 
 
