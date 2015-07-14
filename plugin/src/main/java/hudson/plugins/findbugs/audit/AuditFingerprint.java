@@ -16,7 +16,8 @@ public class AuditFingerprint<T extends FileAnnotation> implements Comparable<Au
     private boolean falsePositive;
     private boolean trackedInCloud;
     private String trackingUrl; // Bugzilla tracking
-    private Object fingerprint; // Unique fingerprint depending on what it will be ...
+    private Object fingerprint; // Unique fingerprint depending on what it will be ... might need to be abstract and
+    //let the implementer decided on the outcome.
 
     public AuditFingerprint(T annotation){
         this.annotation = annotation;

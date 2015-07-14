@@ -81,7 +81,7 @@ public class FindBugsAudit implements ModelObject, Serializable{
     }
 
 
-    private void serialiseAuditFingerprints(){
+    /*private void serialiseAuditFingerprints(){
 
     }
 
@@ -103,6 +103,14 @@ public class FindBugsAudit implements ModelObject, Serializable{
 
     }
 
+    //ret or null if not found
+    public FindBugsAudit getReferenceAudit(){
+        // Look for action, look for stuff. Else return null
+        this.build.getPreviousSuccessfulBuild();
+
+        return null;
+    }*/
+
     @Override
     public String getDisplayName() {
         return "FindBugs Auditing";
@@ -114,6 +122,10 @@ public class FindBugsAudit implements ModelObject, Serializable{
 
     public int getBuildNumber(){
         return this.build.number;
+    }
+
+    public int getPreviousBuildNumber(){
+        return this.build.getPreviousSuccessfulBuild().number;
     }
 
     public int getLastSuccessfulBuildNumber(){

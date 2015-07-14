@@ -35,6 +35,7 @@
       <h1>${%FindBugs Auditing}</h1>
       <button onclick="testAlert()">Click me</button>
       <h2>${it.buildNumber}</h2>
+      <h2>${it.previousBuildNumber}</h2>
       <button onclick="systemLogger('Bound Call')">Binding Call</button>
       <button onclick="updateWarnings()">Remove Annotation</button>
 
