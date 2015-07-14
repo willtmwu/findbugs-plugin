@@ -11,7 +11,7 @@
   <st:bind value="${it}" var="backend"/>
   <script type="text/javascript">
     function systemLogger(message) {
-      backend.boundLogger(message);
+      backend.boundSystemLogger(message);
     }
 
     function updateWarnings(){
@@ -34,12 +34,19 @@
 
       <h1>${%FindBugs Auditing}</h1>
       <button onclick="testAlert()">Click me</button>
-      <h2>${it.number}</h2>
+      <h2>${it.buildNumber}</h2>
       <button onclick="systemLogger('Bound Call')">Binding Call</button>
       <button onclick="updateWarnings()">Remove Annotation</button>
 
 
+      <!-- Summary Table -->
+      <!-- TODO Later will need to find reference -->
 
+
+      <!-- Unconfirmed Warnings -->
+
+
+      <!-- Confirmed Warnings -->
 
 
 
