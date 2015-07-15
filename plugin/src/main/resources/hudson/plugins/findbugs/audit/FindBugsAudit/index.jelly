@@ -21,9 +21,12 @@
 
     function testAlert() {
       alert("HELP!! ME!!! F*CK THIS SHIT PROGRAMMING STACK");
+
+
     }
   </script>
   <style>
+
 
   </style>
 
@@ -111,16 +114,20 @@
               </td>
 
               <!--Checkbox-->
+              <td class="pane">
+                <input type="checkbox" id="${auditFingerprint.annotation.key}"/>
+              </td>
 
               <!--Submit Button-->
+              <td class="pane">
+                <button onclick="systemLogger('Bound Call')" style="float: right;">Submit</button>
+              </td>
 
             </tr>
           </j:forEach>
         </tbody>
       </table>
-
-
-      <button onclick="systemLogger('Bound Call')">Update False Positives</button>
+      <button onclick="systemLogger('Bound Call')" style="float: right;">Update Selection</button>
 
 
       <!-- CONFIRMED WARNING -->
@@ -191,6 +198,9 @@
               </td>
 
               <!--Status-->
+              <td class="pane">
+                <button onclick="systemLogger('Bound Call')" style="float: right;">View</button>
+              </td>
 
             </tr>
           </j:forEach>

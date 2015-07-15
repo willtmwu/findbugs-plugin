@@ -3,6 +3,9 @@ package hudson.plugins.findbugs.audit;
 import hudson.Extension;
 import hudson.Launcher;
 import hudson.model.*;
+import hudson.plugins.analysis.core.AbstractResultAction;
+import hudson.plugins.analysis.core.BuildResult;
+import hudson.plugins.analysis.util.model.FileAnnotation;
 import hudson.tasks.BuildStepMonitor;
 import hudson.tasks.Builder;
 import hudson.tasks.Publisher;
@@ -38,21 +41,45 @@ public class AuditPublisher extends Publisher{
     @Override
     public boolean perform(AbstractBuild<?, ?> build, Launcher launcher, BuildListener listener) throws InterruptedException, IOException {
         this.build = build;
-        listener.getLogger().println("[FINDBUGS_AUDIT] Setting Up Auditing Process...");
+        listener.getLogger().println("[FINDBUGS_AUDIT] Setting Up Auditing Process, please wait ...");
 
-        // Adds to only the build itself
+        //Filter based on false positives from previous audit
+        /*BuildResult currentBuildResult = getCurrentBuildResult();
+        if (currentBuildResult != null) {
+            for (AuditFingerprint auditFingerprint : getPreviousAudit().getFalsePositiveWarnings()) {
+                currentBuildResult.removeAnnotation(auditFingerprint.getAnnotation());
+            }
+        }*/
+
+        // Add a new audit action
         build.addAction(new AuditAction(build));
-
-        //This adds to root.... don't need it
-        //Jenkins.getInstance().getActions().add(new AuditAction(build));
-
-        // Look at previous audit action and check if this build has findbugs-warnings.xml
-        // Override and force recalculation of current based on previous FP results
-
-        // Adding filtering here
 
         return true;
     }
+
+    private FindBugsAudit getPreviousAudit(){
+        AbstractBuild<?,?> previousBuild = this.build.getPreviousSuccessfulBuild();
+        List<? extends Action> previousActions = previousBuild.getAllActions();
+        for( Action action : previousActions ) {
+            if (action instanceof AuditAction) {
+                return ((AuditAction) action).getAuditView();
+            }
+        }
+        return null;
+    }
+
+    private BuildResult getCurrentBuildResult(){
+        AbstractBuild<?,?> previousBuild = this.build.getPreviousSuccessfulBuild();
+        List<? extends Action> previousActions = previousBuild.getAllActions();
+        for( Action action : previousActions ) {
+            if (action instanceof AbstractResultAction) {
+                return ((AbstractResultAction) action).getResult();
+            }
+        }
+        return null;
+    }
+
+
 
     @Override
     public Action getProjectAction(final AbstractProject<?, ?> project) {
