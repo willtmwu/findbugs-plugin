@@ -32,7 +32,7 @@
         checkedservers = checkedservers + c[i].id + ", ";
       }
 
-      server.boundSystemLogger(message);
+      server.boundSystemLogger(checkedservers);
       window.document.getElementById('ServerList').value = checkedservers;
     }
   </script>
