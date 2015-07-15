@@ -49,6 +49,8 @@ public class AuditPublisher extends Publisher{
         // Look at previous audit action and check if this build has findbugs-warnings.xml
         // Override and force recalculation of current based on previous FP results
 
+        // Adding filtering here
+
         return true;
     }
 
@@ -62,7 +64,7 @@ public class AuditPublisher extends Publisher{
 
             @Override
             public String getDisplayName() {
-                return "Findbugs Auditing";
+                return "FindBugs Auditing";
             }
 
             @Override

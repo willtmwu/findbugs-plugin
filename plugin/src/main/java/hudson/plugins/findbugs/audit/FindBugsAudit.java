@@ -1,19 +1,25 @@
 package hudson.plugins.findbugs.audit;
 
+import com.thoughtworks.xstream.XStream;
 import hudson.XmlFile;
 import hudson.model.AbstractBuild;
 import hudson.model.AbstractProject;
 import hudson.model.Action;
 import hudson.model.ModelObject;
+import hudson.plugins.analysis.core.AbstractResultAction;
+import hudson.plugins.analysis.core.BuildResult;
+import hudson.plugins.analysis.util.model.AnnotationStream;
 import hudson.plugins.analysis.util.model.FileAnnotation;
 import hudson.plugins.findbugs.FindBugsResult;
 import hudson.plugins.findbugs.FindBugsResultAction;
 import org.kohsuke.stapler.bind.JavaScriptMethod;
+import org.kohsuke.stapler.export.Exported;
+import org.kohsuke.stapler.export.ExportedBean;
 
+import java.io.File;
+import java.io.IOException;
 import java.io.Serializable;
-import java.util.Collection;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * The view will be responsible for tracking all things related to the task of auditing. Important persistent data
@@ -21,95 +27,173 @@ import java.util.Set;
  *
  * @author William Wu
  */
+@ExportedBean
+@SuppressWarnings({"PMD.ExcessiveClassLength"})
 public class FindBugsAudit implements ModelObject, Serializable{
 
     private AbstractBuild<?,?> build;
     private final AbstractProject<?,?> project;
 
-    //Not sure if needing transient, will need to create new XmlFile to persist to memory
-    //Submit/update button is only used on latest build
-    private transient Collection<AuditFingerprint> auditWarnings;
-
+    private Collection<AuditFingerprint> auditWarnings = null;
 
     public FindBugsAudit(AbstractBuild<?,?> build){
         this.build = build;
         this.project = build.getProject();
 
-        //Direct copy over for now..... need to define reference
+        Collection<AuditFingerprint> referenceWarnings = getReferenceAudit().getAllWarnings();
+        if (referenceWarnings != null) {
+            for (AuditFingerprint fingerprint : referenceWarnings) {
+                AuditFingerprint newFingerprint = new AuditFingerprint(fingerprint.getAnnotation());
+                newFingerprint.setConfirmedWarning(fingerprint.isConfirmedWarning());
+                newFingerprint.setFalsePositive(fingerprint.isFalsePositive());
+                newFingerprint.setTrackedInCloud(fingerprint.isTrackedInCloud());
+                newFingerprint.setTrackingUrl(fingerprint.getTrackingUrl());
+                this.auditWarnings.add(newFingerprint);
+            }
 
+            for (FileAnnotation annotation : getCurrentBuildResult().getNewWarnings()) {
+                this.auditWarnings.add(new AuditFingerprint(annotation));
+            }
+
+        } else {
+            Set<FileAnnotation> buildResultAnnotations = getCurrentBuildResult().getAnnotations();
+            for (FileAnnotation annotations : buildResultAnnotations) {
+                auditWarnings.add(new AuditFingerprint(annotations));
+            }
+        }
+        serialiseAuditFingerprints();
     }
 
+    public void loadClassData(){
+        if (!loadAuditFingerprints()){
+            Set<FileAnnotation> buildResultAnnotations = getCurrentBuildResult().getAnnotations();
+            for (FileAnnotation annotations : buildResultAnnotations) {
+                auditWarnings.add(new AuditFingerprint(annotations));
+            }
+            serialiseAuditFingerprints();
+        }
+    }
 
     @JavaScriptMethod
     public void updateWarnings(){
         System.out.println("Checking update history: latest " + build.getProject().getLastSuccessfulBuild().number);
 
-        //Now let's try forcing remove a single FileAnnotation and persist it into underlying serialisation memory
-        //build.xml and findbugs-warnings.xml
-
-
-        //Current findbugs warning action, same build reference space
-        int index = indexOfFindBugsResultAction();
-        if (index != -1) {
-            FindBugsResultAction fbAction = (FindBugsResultAction) build.getAllActions().get(index);
-            FindBugsResult fbResult = fbAction.getResult();
-
-
-            //Let's start experimentation
-            //If marked as tracking, don't remove. Else if false positive then remove.
-
-
-            //Graph seems to update on next build, after modification
-            //wonder if I should intercept the parser result and re-clone the BuildResult
-            FileAnnotation fileAnnotation = null;
-            for (FileAnnotation fa : fbResult.getAnnotations()) {
-                fileAnnotation = fa;
+        //Test single first remove
+        FindBugsResult findBugsResult = (FindBugsResult) getCurrentBuildResult();
+        if (findBugsResult != null) {
+            for(FileAnnotation fileAnnotation : findBugsResult.getAnnotations()){
+                findBugsResult.removeAnnotation(fileAnnotation);
+                break;
             }
-            fbResult.removeAnnotation(fileAnnotation);
-
         }
     }
 
+    public List<AuditFingerprint> getAllWarnings(){
+        List<AuditFingerprint> warnings = new ArrayList<AuditFingerprint>(this.auditWarnings);
+        Collections.sort(warnings);
+        return warnings;
+    }
 
-    private int indexOfFindBugsResultAction(){
+    public List<AuditFingerprint> getUnconfirmedWarnings(){
+        List<AuditFingerprint> warnings = new ArrayList<AuditFingerprint>();
+        for (AuditFingerprint fingerprint : this.auditWarnings) {
+            if (!fingerprint.isConfirmedWarning()) {
+                warnings.add(fingerprint);
+            }
+        }
+        return warnings;
+    }
+
+    public List<AuditFingerprint> getConfirmedWarnings(){
+        List<AuditFingerprint> warnings = new ArrayList<AuditFingerprint>();
+        warnings.addAll(getTrackedWarnings());
+        warnings.addAll(getFalsePositiveWarnings());
+        return warnings;
+    }
+
+    public List<AuditFingerprint> getTrackedWarnings(){
+        List<AuditFingerprint> warnings = new ArrayList<AuditFingerprint>();
+        for (AuditFingerprint fingerprint : this.auditWarnings) {
+            if (fingerprint.isConfirmedWarning() && fingerprint.isTrackedInCloud()) {
+                warnings.add(fingerprint);
+            }
+        }
+        return warnings;
+    }
+
+    public List<AuditFingerprint> getFalsePositiveWarnings(){
+        List<AuditFingerprint> warnings = new ArrayList<AuditFingerprint>();
+        for (AuditFingerprint fingerprint : this.auditWarnings) {
+            if (fingerprint.isConfirmedWarning() && fingerprint.isFalsePositive()) {
+                warnings.add(fingerprint);
+            }
+        }
+        return warnings;
+    }
+
+    private void serialiseAuditFingerprints(){
+        try {
+            XmlFile file = getSerializationAuditFile();
+            file.write(this.auditWarnings);
+        } catch (IOException io){
+            System.out.println(io);
+        }
+    }
+
+    private boolean loadAuditFingerprints(){
+        try {
+            XmlFile file = getSerializationAuditFile();
+            if (file.exists()) {
+                this.auditWarnings = (Collection<AuditFingerprint>) file.read();
+                return true;
+            }
+        } catch (Exception e){
+            // Failed file
+            System.out.println(e);
+        }
+        return false;
+    }
+
+    private XmlFile getSerializationAuditFile(){
+        XmlFile file = new XmlFile(getXStream(),
+                new File(this.build.getRootDir(), getSerializationFileName().replace(".xml", "-auditFingerprints.xml")));
+        return file;
+    }
+
+    private XStream getXStream() {
+        AnnotationStream xstream = new AnnotationStream();
+        configure(xstream);
+        return xstream;
+    }
+
+    protected void configure(final XStream xstream) {
+        // empty default
+    }
+
+    protected String getSerializationFileName(){
+        return "findbugs.xml";
+    }
+
+    //ret or null if not found, reference as in previous build
+    public FindBugsAudit getReferenceAudit(){
+        AbstractBuild<?,?> previousBuild = this.build.getPreviousSuccessfulBuild();
+        List<? extends Action> previousActions = previousBuild.getAllActions();
+        for( Action action : previousActions ) {
+            if (action instanceof AuditAction) {
+                return ((AuditAction) action).getAuditView();
+            }
+        }
+        return null;
+    }
+
+    public BuildResult getCurrentBuildResult(){
         for (Action action : this.build.getAllActions()) {
             if (action instanceof FindBugsResultAction) {
-                return this.build.getAllActions().indexOf(action);
+                return ((AbstractResultAction) action).getResult();
             }
         }
-        return -1;
-    }
-
-
-    /*private void serialiseAuditFingerprints(){
-
-    }
-
-    private void loadAuditFingerprints(){
-
-    }
-
-
-    private XmlFile getAuditFingerprintsFile(){
-
-        return ;
-    }
-
-    public Set<FileAnnotation> getUnconfirmedWarnings(){
-
-    }
-
-    public Set<FileAnnotation> getConfirmedWarnings(){
-
-    }
-
-    //ret or null if not found
-    public FindBugsAudit getReferenceAudit(){
-        // Look for action, look for stuff. Else return null
-        this.build.getPreviousSuccessfulBuild();
-
         return null;
-    }*/
+    }
 
     @Override
     public String getDisplayName() {
@@ -120,6 +204,7 @@ public class FindBugsAudit implements ModelObject, Serializable{
         return this.build;
     }
 
+    @Exported
     public int getBuildNumber(){
         return this.build.number;
     }
@@ -129,11 +214,9 @@ public class FindBugsAudit implements ModelObject, Serializable{
     }
 
     public int getLastSuccessfulBuildNumber(){
-        return build.getProject().getLastSuccessfulBuild().number;
+        return this.project.getLastSuccessfulBuild().number;
     }
 
-    // Is this current build the latest successful one?
-    // Or has it been superceded
     public boolean isLatestSuccessfulBuild(){
         return (getBuildNumber() == getLastSuccessfulBuildNumber());
     }
@@ -142,6 +225,5 @@ public class FindBugsAudit implements ModelObject, Serializable{
     public void boundSystemLogger(String message){
         System.out.println(message);
     }
-
 
 }

@@ -33,6 +33,7 @@ public class AuditAction implements Action, StaplerProxy {
 
     @Override
     public final Object getTarget() {
+        this.auditView.loadClassData();
         return this.auditView;
     }
 

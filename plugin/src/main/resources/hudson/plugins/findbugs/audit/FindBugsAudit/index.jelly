@@ -1,6 +1,6 @@
 <?jelly escape-by-default='true'?>
 <j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define" xmlns:l="/lib/layout"
-         xmlns:t="/lib/hudson" xmlns:f="/lib/form" xmlns:i="jelly:fmt" xmlns:result="/result">
+         xmlns:t="/lib/hudson" xmlns:f="/lib/form" xmlns:i="jelly:fmt" xmlns:result="/result" xmlns:u="/util" >
 
   <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
   <script>jQuery.noConflict();</script>
@@ -8,14 +8,14 @@
   http://stackoverflow.com/questions/980697/element-dispatchevent-is-not-a-function-js-error-caught-in-firebug-of-ff3-0
   -->
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular.min.js"></script>
-  <st:bind value="${it}" var="backend"/>
+  <st:bind value="${it}" var="server"/>
   <script type="text/javascript">
     function systemLogger(message) {
-      backend.boundSystemLogger(message);
+      server.boundSystemLogger(message);
     }
 
     function updateWarnings(){
-      backend.updateWarnings();
+      server.updateWarnings();
     }
 
 
@@ -23,6 +23,9 @@
       alert("HELP!! ME!!! F*CK THIS SHIT PROGRAMMING STACK");
     }
   </script>
+  <style>
+
+  </style>
 
   <l:layout norefresh="true">
     <st:include it="${it.build}" page="sidepanel.jelly" />
@@ -32,27 +35,175 @@
       <!--EVERYTHING ON 1 CLEAN PAGE-->
 
 
-      <h1>${%FindBugs Auditing}</h1>
-      <button onclick="testAlert()">Click me</button>
-      <h2>${it.buildNumber}</h2>
-      <h2>${it.previousBuildNumber}</h2>
-      <button onclick="systemLogger('Bound Call')">Binding Call</button>
-      <button onclick="updateWarnings()">Remove Annotation</button>
+      <h1>${%FindBugs Auditing} for ${it.buildNumber}</h1>
 
-
+      <h2>${%Summary}</h2>
       <!-- Summary Table -->
-      <!-- TODO Later will need to find reference -->
+      <!-- TODO Later will need to figure out calculations -->
 
 
-      <!-- Unconfirmed Warnings -->
+      <!-- UNCONFIRMED WARNINGS -->
+      <h2>${%Unconfirmed Warnings}</h2>
+      <table class="pane sortable" id="auditUnconfirmedWarnings">
+
+        <tr>
+          <td class="pane-header">${%File}</td>
+          <td class="pane-header">${%Module}</td>
+          <td class="pane-header">${%Package}</td>
+          <td class="pane-header">${%Line}</td>
+          <td class="pane-header">${%Priority}</td>
+          <td class="pane-header">${%Rank}</td>
+          <td class="pane-header">${%Type}</td>
+          <td class="pane-header">${%Category}</td>
+          <td class="pane-header">${%False Positive}</td>
+          <td class="pane-header">${%Bugzilla}</td>
+        </tr>
+
+        <tbody>
+          <j:forEach var="auditFingerprint" items="${it.unconfirmedWarnings}">
+            <tr>
+
+              <td class="pane">
+                <div tooltip="${auditFingerprint.annotation.message}">
+                  <u:sourceLink it="${it}" warning="${auditFingerprint.annotation}"/>
+                </div>
+              </td>
+
+              <td class="pane">
+                <div tooltip="${auditFingerprint.annotation.message}">
+                  <a href="module.${auditFingerprint.annotation.moduleName.hashCode()}/">
+                    ${auditFingerprint.annotation.moduleName}
+                  </a>
+                </div>
+              </td>
+
+              <td class="pane">
+                <div tooltip="${auditFingerprint.annotation.message}">
+                  <a href="package.${auditFingerprint.annotation.packageName.hashCode()}/">
+                    ${auditFingerprint.annotation.packageName}
+                  </a>
+                </div>
+              </td>
+
+              <td class="pane">
+                <div tooltip="${auditFingerprint.annotation.message}">
+                  <j:choose>
+                    <j:when test="${auditFingerprint.annotation.primaryLineNumber &lt; 1}">
+                      -
+                    </j:when>
+                    <j:otherwise>
+                      ${auditFingerprint.annotation.primaryLineNumber}
+                    </j:otherwise>
+                  </j:choose>
+                </div>
+              </td>
+
+              <td class="pane">
+                <div tooltip="${auditFingerprint.annotation.message}"> ${auditFingerprint.annotation.priority.localizedString} </div>
+              </td>
+
+              <td class="pane">
+                <div tooltip="${auditFingerprint.annotation.message}"> ${auditFingerprint.annotation.rank} </div>
+              </td>
+
+              <td class="pane">
+                <div tooltip="${auditFingerprint.annotation.message}"> ${auditFingerprint.annotation.type} </div>
+              </td>
+
+              <td class="pane">
+                <div tooltip="${auditFingerprint.annotation.message}"> ${auditFingerprint.annotation.category} </div>
+              </td>
+
+              <!--Checkbox-->
+
+              <!--Submit Button-->
+
+            </tr>
+          </j:forEach>
+        </tbody>
+      </table>
 
 
-      <!-- Confirmed Warnings -->
+      <button onclick="systemLogger('Bound Call')">Update False Positives</button>
 
 
+      <!-- CONFIRMED WARNING -->
+      <h2>${%Confirmed Warnings}</h2>
+      <table class="pane sortable" id="auditConfirmedWarnings">
 
+        <tr>
+          <td class="pane-header">${%File}</td>
+          <td class="pane-header">${%Module}</td>
+          <td class="pane-header">${%Package}</td>
+          <td class="pane-header">${%Line}</td>
+          <td class="pane-header">${%Priority}</td>
+          <td class="pane-header">${%Rank}</td>
+          <td class="pane-header">${%Type}</td>
+          <td class="pane-header">${%Category}</td>
+          <td class="pane-header">${%Status}</td>
+        </tr>
 
+        <tbody>
+          <j:forEach var="auditFingerprint" items="${it.confirmedWarnings}">
+            <tr>
 
+              <td class="pane">
+                <div tooltip="${auditFingerprint.annotation.message}">
+                  <u:sourceLink it="${it}" warning="${auditFingerprint.annotation}"/>
+                </div>
+              </td>
+
+              <td class="pane">
+                <div tooltip="${auditFingerprint.annotation.message}">
+                  <a href="module.${auditFingerprint.annotation.moduleName.hashCode()}/">
+                    ${auditFingerprint.annotation.moduleName}
+                  </a>
+                </div>
+              </td>
+
+              <td class="pane">
+                <div tooltip="${auditFingerprint.annotation.message}">
+                  <a href="package.${auditFingerprint.annotation.packageName.hashCode()}/">
+                    ${auditFingerprint.annotation.packageName}
+                  </a>
+                </div>
+              </td>
+
+              <td class="pane">
+                <div tooltip="${auditFingerprint.annotation.message}">
+                  <j:choose>
+                    <j:when test="${auditFingerprint.annotation.primaryLineNumber &lt; 1}">
+                      -
+                    </j:when>
+                    <j:otherwise>
+                      ${auditFingerprint.annotation.primaryLineNumber}
+                    </j:otherwise>
+                  </j:choose>
+                </div>
+              </td>
+
+              <td class="pane">
+                <div tooltip="${auditFingerprint.annotation.message}"> ${auditFingerprint.annotation.priority.localizedString} </div>
+              </td>
+
+              <td class="pane">
+                <div tooltip="${auditFingerprint.annotation.message}"> ${auditFingerprint.annotation.rank} </div>
+              </td>
+
+              <td class="pane">
+                <div tooltip="${auditFingerprint.annotation.message}"> ${auditFingerprint.annotation.type} </div>
+              </td>
+
+              <td class="pane">
+                <div tooltip="${auditFingerprint.annotation.message}"> ${auditFingerprint.annotation.category} </div>
+              </td>
+
+              <!--Status-->
+
+            </tr>
+          </j:forEach>
+        </tbody>
+      </table>
 
 
     </l:main-panel>

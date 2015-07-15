@@ -49,14 +49,5 @@ public class FindBugsProjectAction extends AbstractProjectAction<ResultAction<Fi
         list.add(new FindbugsEvaluationsGraph());
         return list;
     }
-
-    @Override
-    public ResultAction<?> getLastAction() {
-        ResultAction<FindBugsResult> fbr = (ResultAction<FindBugsResult>) super.getLastAction();
-        //fbr.getResult().rmSingleNum();
-        return fbr;
-    }
-
-
 }
 
