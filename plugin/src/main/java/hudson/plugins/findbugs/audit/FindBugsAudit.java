@@ -1,5 +1,6 @@
 package hudson.plugins.findbugs.audit;
 
+import com.google.common.collect.ImmutableSortedSet;
 import com.thoughtworks.xstream.XStream;
 import hudson.XmlFile;
 import hudson.model.AbstractBuild;
@@ -42,9 +43,10 @@ public class FindBugsAudit implements ModelObject, Serializable{
         this.auditWarnings = new ArrayList<AuditFingerprint>();
 
         Collection<AuditFingerprint> referenceWarnings = getReferenceAudit().getAllWarnings();
-        if (referenceWarnings != null) {
+        if (referenceWarnings != null && referenceWarnings.size() > 0) {
             for (AuditFingerprint fingerprint : referenceWarnings) {
                 AuditFingerprint newFingerprint = new AuditFingerprint(fingerprint.getAnnotation());
+                // TODO Move into super sometime....
                 newFingerprint.setConfirmedWarning(fingerprint.isConfirmedWarning());
                 newFingerprint.setFalsePositive(fingerprint.isFalsePositive());
                 newFingerprint.setTrackedInCloud(fingerprint.isTrackedInCloud());
@@ -104,6 +106,8 @@ public class FindBugsAudit implements ModelObject, Serializable{
             }
         }
         return warnings;
+
+        //ImmutableSortedSet.copyOf(annotations.values())
     }
 
     public List<AuditFingerprint> getConfirmedWarnings(){

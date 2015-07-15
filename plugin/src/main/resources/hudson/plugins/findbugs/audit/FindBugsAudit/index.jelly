@@ -35,7 +35,7 @@
       <!--EVERYTHING ON 1 CLEAN PAGE-->
 
 
-      <h1>${%FindBugs Auditing} for ${it.buildNumber}</h1>
+      <h1>${%FindBugs Auditing} for Build ${it.buildNumber}</h1>
 
       <h2>${%Summary}</h2>
       <!-- Summary Table -->
@@ -65,23 +65,19 @@
 
               <td class="pane">
                 <div tooltip="${auditFingerprint.annotation.message}">
-                  <u:sourceLink it="${it}" warning="${auditFingerprint.annotation}"/>
+                  ${auditFingerprint.annotation.fileName}
                 </div>
               </td>
 
               <td class="pane">
                 <div tooltip="${auditFingerprint.annotation.message}">
-                  <a href="module.${auditFingerprint.annotation.moduleName.hashCode()}/">
-                    ${auditFingerprint.annotation.moduleName}
-                  </a>
+                  ${auditFingerprint.annotation.moduleName}
                 </div>
               </td>
 
               <td class="pane">
                 <div tooltip="${auditFingerprint.annotation.message}">
-                  <a href="package.${auditFingerprint.annotation.packageName.hashCode()}/">
-                    ${auditFingerprint.annotation.packageName}
-                  </a>
+                  ${auditFingerprint.annotation.packageName}
                 </div>
               </td>
 
@@ -149,23 +145,19 @@
 
               <td class="pane">
                 <div tooltip="${auditFingerprint.annotation.message}">
-                  <u:sourceLink it="${it}" warning="${auditFingerprint.annotation}"/>
+                  ${auditFingerprint.annotation.fileName}
                 </div>
               </td>
 
               <td class="pane">
                 <div tooltip="${auditFingerprint.annotation.message}">
-                  <a href="module.${auditFingerprint.annotation.moduleName.hashCode()}/">
-                    ${auditFingerprint.annotation.moduleName}
-                  </a>
+                  ${auditFingerprint.annotation.moduleName}
                 </div>
               </td>
 
               <td class="pane">
                 <div tooltip="${auditFingerprint.annotation.message}">
-                  <a href="package.${auditFingerprint.annotation.packageName.hashCode()}/">
-                    ${auditFingerprint.annotation.packageName}
-                  </a>
+                  ${auditFingerprint.annotation.packageName}
                 </div>
               </td>
 
