@@ -34,7 +34,7 @@ public class FindBugsAudit implements ModelObject, Serializable{
     private AbstractBuild<?,?> build;
     private final AbstractProject<?,?> project;
 
-    private Collection<AuditFingerprint> auditWarnings = null;
+    private Collection<AuditFingerprint> auditWarnings = new ArrayList<AuditFingerprint>();
 
     public FindBugsAudit(AbstractBuild<?,?> build){
         this.build = build;
