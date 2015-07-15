@@ -65,7 +65,7 @@
 
               <td class="pane">
                 <div tooltip="${auditFingerprint.annotation.message}">
-                  ${auditFingerprint.annotation.fileName}
+                  ${auditFingerprint.annotation.shortFileName}
                 </div>
               </td>
 
@@ -145,7 +145,7 @@
 
               <td class="pane">
                 <div tooltip="${auditFingerprint.annotation.message}">
-                  ${auditFingerprint.annotation.fileName}
+                  ${auditFingerprint.annotation.shortFileName}
                 </div>
               </td>
 
