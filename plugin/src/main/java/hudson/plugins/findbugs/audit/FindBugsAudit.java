@@ -13,6 +13,10 @@ import hudson.plugins.analysis.util.model.AnnotationStream;
 import hudson.plugins.analysis.util.model.FileAnnotation;
 import hudson.plugins.findbugs.FindBugsResult;
 import hudson.plugins.findbugs.FindBugsResultAction;
+import hudson.util.FormValidation;
+
+import org.kohsuke.stapler.HttpResponse;
+import org.kohsuke.stapler.QueryParameter;
 import org.kohsuke.stapler.bind.JavaScriptMethod;
 import org.kohsuke.stapler.export.Exported;
 import org.kohsuke.stapler.export.ExportedBean;
@@ -230,6 +234,16 @@ public class FindBugsAudit implements ModelObject, Serializable{
     @JavaScriptMethod
     public void boundSystemLogger(String message){
         System.out.println(message);
+    }
+
+    public HttpResponse doForcePromotion(@QueryParameter("name") String name, @QueryParameter("serverList") String serverList) throws IOException, InterruptedException {
+        try {
+            System.out.println(name + " | " + serverList);
+            return FormValidation.ok("Success");
+        } catch (Exception e) {
+            System.out.println(e);
+            return FormValidation.error("Failure");
+        }
     }
 
 }
