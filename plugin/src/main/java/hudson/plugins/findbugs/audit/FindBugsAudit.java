@@ -34,11 +34,12 @@ public class FindBugsAudit implements ModelObject, Serializable{
     private AbstractBuild<?,?> build;
     private final AbstractProject<?,?> project;
 
-    private Collection<AuditFingerprint> auditWarnings = new ArrayList<AuditFingerprint>();
+    private Collection<AuditFingerprint> auditWarnings;
 
     public FindBugsAudit(AbstractBuild<?,?> build){
         this.build = build;
         this.project = build.getProject();
+        this.auditWarnings = new ArrayList<AuditFingerprint>();
 
         Collection<AuditFingerprint> referenceWarnings = getReferenceAudit().getAllWarnings();
         if (referenceWarnings != null) {
@@ -67,6 +68,7 @@ public class FindBugsAudit implements ModelObject, Serializable{
     public void loadClassData(){
         if (!loadAuditFingerprints()){
             Set<FileAnnotation> buildResultAnnotations = getCurrentBuildResult().getAnnotations();
+            this.auditWarnings = new ArrayList<AuditFingerprint>();
             for (FileAnnotation annotations : buildResultAnnotations) {
                 auditWarnings.add(new AuditFingerprint(annotations));
             }
