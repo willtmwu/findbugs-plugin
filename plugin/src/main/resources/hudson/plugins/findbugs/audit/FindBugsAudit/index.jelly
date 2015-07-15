@@ -22,7 +22,17 @@
     function testAlert() {
       alert("HELP!! ME!!! F*CK THIS SHIT PROGRAMMING STACK");
 
+    }
 
+    function saveChecksForce() {
+      var c = window.document.getElementsByName("unconfirmedCheckbox");
+      var checkedservers = "";
+
+      for (var i = 0; i < c.length; i++) {
+        checkedservers = checkedservers + c[i].id + ", ";
+      }
+
+      window.document.getElementById('ServerList').value = checkedservers;
     }
   </script>
   <style>
@@ -115,7 +125,7 @@
 
               <!--Checkbox-->
               <td class="pane" style="text-align:center;">
-                <input type="checkbox" id="${auditFingerprint.annotation.key}"/>
+                <input type="checkbox" id="${auditFingerprint.annotation.key}" name="unconfirmedCheckbox"/>
               </td>
 
               <!--Submit Button-->
@@ -128,6 +138,16 @@
         </tbody>
       </table>
       <button onclick="systemLogger('Bound Call')" style="float: right; margin:10px 5px 15px 20px;">Update Selection</button>
+
+
+
+
+      <!--TESTING ZONE-->
+      <h3>Testing Zone</h3>
+      <form style="float:right" method="post" action="forcePromotion?name=${p.name}" onsubmit="saveChecksForce()">
+        <f:submit value="${%Force promotion}" />
+        <input id="ServerList" name="serverList" type="hidden" />
+      </form>
 
 
       <!-- CONFIRMED WARNING -->

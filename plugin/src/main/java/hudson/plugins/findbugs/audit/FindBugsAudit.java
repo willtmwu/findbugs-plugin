@@ -110,8 +110,6 @@ public class FindBugsAudit implements ModelObject, Serializable{
             }
         }
         return warnings;
-
-        //ImmutableSortedSet.copyOf(annotations.values())
     }
 
     public List<AuditFingerprint> getConfirmedWarnings(){
