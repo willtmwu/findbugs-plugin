@@ -114,20 +114,20 @@
               </td>
 
               <!--Checkbox-->
-              <td class="pane">
+              <td class="pane" style="text-align:center;">
                 <input type="checkbox" id="${auditFingerprint.annotation.key}"/>
               </td>
 
               <!--Submit Button-->
-              <td class="pane">
-                <button onclick="systemLogger('Bound Call')" style="float: right;">Submit</button>
+              <td class="pane" style="text-align:center;">
+                <button onclick="systemLogger('Bound Call')" style="float: center;">Submit</button>
               </td>
 
             </tr>
           </j:forEach>
         </tbody>
       </table>
-      <button onclick="systemLogger('Bound Call')" style="float: right;">Update Selection</button>
+      <button onclick="systemLogger('Bound Call')" style="float: right; margin:10px 5px 15px 20px;">Update Selection</button>
 
 
       <!-- CONFIRMED WARNING -->
