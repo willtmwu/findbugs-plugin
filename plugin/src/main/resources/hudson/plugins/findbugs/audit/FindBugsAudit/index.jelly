@@ -28,7 +28,7 @@
       var c = window.document.getElementsByName("unconfirmedCheckbox");
       var checkedservers = "";
 
-      for (var i = 0; i < c.length; i++) {
+      for (var i = 0; i &lt; c.length; i++) {
         checkedservers = checkedservers + c[i].id + ", ";
       }
 
