@@ -181,14 +181,12 @@ public class FindBugsAudit implements ModelObject, Serializable{
 
     private boolean loadAuditFingerprints(){
         try {
-            if (!this.classDataLoaded) {
-                XmlFile file = getSerializationAuditFile();
-                if (file.exists()) {
+            XmlFile file = getSerializationAuditFile();
+            if (file.exists()) {
+                if (!this.classDataLoaded) {
                     this.auditWarnings = (Collection<AuditFingerprint>) file.read();
                     this.classDataLoaded = true;
-                    return true;
                 }
-            } else {
                 return true;
             }
         } catch (Exception e){
