@@ -44,12 +44,15 @@ public class AuditPublisher extends Publisher{
         listener.getLogger().println("[FINDBUGS_AUDIT] Setting Up Auditing Process, please wait ...");
 
         //Filter based on false positives from previous audit
-        /*BuildResult currentBuildResult = getCurrentBuildResult();
-        if (currentBuildResult != null) {
+        BuildResult currentBuildResult = getCurrentBuildResult();
+        FindBugsAudit previousAudit = getPreviousAudit();
+        if (currentBuildResult != null && previousAudit != null) {
+            List<FileAnnotation> falsePositiveAnnotations = new ArrayList<FileAnnotation>();
             for (AuditFingerprint auditFingerprint : getPreviousAudit().getFalsePositiveWarnings()) {
-                currentBuildResult.removeAnnotation(auditFingerprint.getAnnotation());
+                falsePositiveAnnotations.add(auditFingerprint.getAnnotation());
             }
-        }*/
+            currentBuildResult.removeAnnotations(falsePositiveAnnotations);
+        }
 
         // Add a new audit action
         build.addAction(new AuditAction(build));
@@ -59,19 +62,20 @@ public class AuditPublisher extends Publisher{
 
     private FindBugsAudit getPreviousAudit(){
         AbstractBuild<?,?> previousBuild = this.build.getPreviousSuccessfulBuild();
-        List<? extends Action> previousActions = previousBuild.getAllActions();
-        for( Action action : previousActions ) {
-            if (action instanceof AuditAction) {
-                return ((AuditAction) action).getAuditView();
+        if (previousBuild != null) {
+            List<? extends Action> previousActions = previousBuild.getAllActions();
+            for( Action action : previousActions ) {
+                if (action instanceof AuditAction) {
+                    return ((AuditAction) action).getAuditView();
+                }
             }
         }
         return null;
     }
 
     private BuildResult getCurrentBuildResult(){
-        AbstractBuild<?,?> previousBuild = this.build.getPreviousSuccessfulBuild();
-        List<? extends Action> previousActions = previousBuild.getAllActions();
-        for( Action action : previousActions ) {
+        List<? extends Action> currentActions = this.build.getAllActions();
+        for( Action action : currentActions ) {
             if (action instanceof AbstractResultAction) {
                 return ((AbstractResultAction) action).getResult();
             }
@@ -96,7 +100,11 @@ public class AuditPublisher extends Publisher{
 
             @Override
             public String getUrlName() {
-                return project.getLastSuccessfulBuild().number + "/findbugsAudit";
+                AbstractBuild<?,?> lastBuild = project.getLastSuccessfulBuild();
+                if (lastBuild != null) {
+                    return lastBuild.number + "/findbugsAudit";
+                }
+                return "";
             }
         });
     }

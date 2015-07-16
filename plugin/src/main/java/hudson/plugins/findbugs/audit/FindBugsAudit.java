@@ -46,11 +46,11 @@ public class FindBugsAudit implements ModelObject, Serializable{
         this.project = build.getProject();
         this.auditWarnings = new ArrayList<AuditFingerprint>();
 
-        Collection<AuditFingerprint> referenceWarnings = getReferenceAudit().getAllWarnings();
-        if (referenceWarnings != null && referenceWarnings.size() > 0) {
+        FindBugsAudit previousAudit = getReferenceAudit();
+        if (previousAudit != null && previousAudit.getAllWarnings().size() > 0) {
+            Collection<AuditFingerprint> referenceWarnings = previousAudit.getAllWarnings();
             for (AuditFingerprint fingerprint : referenceWarnings) {
                 AuditFingerprint newFingerprint = new AuditFingerprint(fingerprint.getAnnotation());
-                // TODO Move into super sometime....
                 newFingerprint.setConfirmedWarning(fingerprint.isConfirmedWarning());
                 newFingerprint.setFalsePositive(fingerprint.isFalsePositive());
                 newFingerprint.setTrackedInCloud(fingerprint.isTrackedInCloud());
@@ -63,9 +63,11 @@ public class FindBugsAudit implements ModelObject, Serializable{
             }
 
         } else {
-            Set<FileAnnotation> buildResultAnnotations = getCurrentBuildResult().getAnnotations();
-            for (FileAnnotation annotations : buildResultAnnotations) {
-                auditWarnings.add(new AuditFingerprint(annotations));
+            BuildResult currentBuildResult = getCurrentBuildResult();
+            if (currentBuildResult != null) {
+                for (FileAnnotation annotations : currentBuildResult.getAnnotations()) {
+                    auditWarnings.add(new AuditFingerprint(annotations));
+                }
             }
         }
         serialiseAuditFingerprints();
@@ -73,108 +75,25 @@ public class FindBugsAudit implements ModelObject, Serializable{
 
     public void loadClassData(){
         if (!loadAuditFingerprints()){
-            Set<FileAnnotation> buildResultAnnotations = getCurrentBuildResult().getAnnotations();
+            BuildResult currentBuildResult = getCurrentBuildResult();
             this.auditWarnings = new ArrayList<AuditFingerprint>();
-            for (FileAnnotation annotations : buildResultAnnotations) {
-                auditWarnings.add(new AuditFingerprint(annotations));
+            if (currentBuildResult != null) {
+                for (FileAnnotation annotations : currentBuildResult.getAnnotations()) {
+                    auditWarnings.add(new AuditFingerprint(annotations));
+                }
             }
             serialiseAuditFingerprints();
         }
     }
 
-    public List<AuditFingerprint> getAllWarnings(){
-        List<AuditFingerprint> warnings = new ArrayList<AuditFingerprint>(this.auditWarnings);
-        Collections.sort(warnings);
-        return warnings;
-    }
-
-    public List<AuditFingerprint> getUnconfirmedWarnings(){
-        List<AuditFingerprint> warnings = new ArrayList<AuditFingerprint>();
-        for (AuditFingerprint fingerprint : this.auditWarnings) {
-            if (!fingerprint.isConfirmedWarning()) {
-                warnings.add(fingerprint);
-            }
-        }
-        return warnings;
-    }
-
-    public List<AuditFingerprint> getConfirmedWarnings(){
-        List<AuditFingerprint> warnings = new ArrayList<AuditFingerprint>();
-        warnings.addAll(getTrackedWarnings());
-        warnings.addAll(getFalsePositiveWarnings());
-        return warnings;
-    }
-
-    public List<AuditFingerprint> getTrackedWarnings(){
-        List<AuditFingerprint> warnings = new ArrayList<AuditFingerprint>();
-        for (AuditFingerprint fingerprint : this.auditWarnings) {
-            if (fingerprint.isConfirmedWarning() && fingerprint.isTrackedInCloud()) {
-                warnings.add(fingerprint);
-            }
-        }
-        return warnings;
-    }
-
-    public List<AuditFingerprint> getFalsePositiveWarnings(){
-        List<AuditFingerprint> warnings = new ArrayList<AuditFingerprint>();
-        for (AuditFingerprint fingerprint : this.auditWarnings) {
-            if (fingerprint.isConfirmedWarning() && fingerprint.isFalsePositive()) {
-                warnings.add(fingerprint);
-            }
-        }
-        return warnings;
-    }
-
-    private void serialiseAuditFingerprints(){
-        try {
-            XmlFile file = getSerializationAuditFile();
-            file.write(this.auditWarnings);
-        } catch (IOException io){
-            System.out.println(io);
-        }
-    }
-
-    private boolean loadAuditFingerprints(){
-        try {
-            XmlFile file = getSerializationAuditFile();
-            if (file.exists()) {
-                this.auditWarnings = (Collection<AuditFingerprint>) file.read();
-                return true;
-            }
-        } catch (Exception e){
-            // Failed file
-            System.out.println(e);
-        }
-        return false;
-    }
-
-    private XmlFile getSerializationAuditFile(){
-        XmlFile file = new XmlFile(getXStream(),
-                new File(this.build.getRootDir(), getSerializationFileName().replace(".xml", "-auditFingerprints.xml")));
-        return file;
-    }
-
-    private XStream getXStream() {
-        AnnotationStream xstream = new AnnotationStream();
-        configure(xstream);
-        return xstream;
-    }
-
-    protected void configure(final XStream xstream) {
-        // empty default
-    }
-
-    protected String getSerializationFileName(){
-        return "findbugs.xml";
-    }
-
-    //ret or null if not found, reference as in previous build
     public FindBugsAudit getReferenceAudit(){
         AbstractBuild<?,?> previousBuild = this.build.getPreviousSuccessfulBuild();
-        List<? extends Action> previousActions = previousBuild.getAllActions();
-        for( Action action : previousActions ) {
-            if (action instanceof AuditAction) {
-                return ((AuditAction) action).getAuditView();
+        if (previousBuild != null) {
+            List<? extends Action> previousActions = previousBuild.getAllActions();
+            for( Action action : previousActions ) {
+                if (action instanceof AuditAction) {
+                    return ((AuditAction) action).getAuditView();
+                }
             }
         }
         return null;
@@ -238,6 +157,121 @@ public class FindBugsAudit implements ModelObject, Serializable{
             }
         }
     }
+
+
+
+
+
+
+
+
+
+
+
+
+    private void serialiseAuditFingerprints(){
+        try {
+            XmlFile file = getSerializationAuditFile();
+            file.write(this.auditWarnings);
+        } catch (IOException io){
+            System.out.println(io);
+        }
+    }
+
+    private boolean loadAuditFingerprints(){
+        try {
+            XmlFile file = getSerializationAuditFile();
+            if (file.exists()) {
+                this.auditWarnings = (Collection<AuditFingerprint>) file.read();
+                return true;
+            }
+        } catch (Exception e){
+            // Failed file
+            System.out.println(e);
+        }
+        return false;
+    }
+
+    private XmlFile getSerializationAuditFile(){
+        XmlFile file = new XmlFile(getXStream(),
+                new File(this.build.getRootDir(), getSerializationFileName().replace(".xml", "-auditFingerprints.xml")));
+        return file;
+    }
+
+    private XStream getXStream() {
+        AnnotationStream xstream = new AnnotationStream();
+        configure(xstream);
+        return xstream;
+    }
+
+    protected void configure(final XStream xstream) {
+        // empty default
+    }
+
+    protected String getSerializationFileName(){
+        return "findbugs.xml";
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public List<AuditFingerprint> getAllWarnings(){
+        List<AuditFingerprint> warnings = new ArrayList<AuditFingerprint>(this.auditWarnings);
+        Collections.sort(warnings);
+        return warnings;
+    }
+
+    public List<AuditFingerprint> getUnconfirmedWarnings(){
+        List<AuditFingerprint> warnings = new ArrayList<AuditFingerprint>();
+        for (AuditFingerprint fingerprint : this.auditWarnings) {
+            if (!fingerprint.isConfirmedWarning()) {
+                warnings.add(fingerprint);
+            }
+        }
+        return warnings;
+    }
+
+    public List<AuditFingerprint> getConfirmedWarnings(){
+        List<AuditFingerprint> warnings = new ArrayList<AuditFingerprint>();
+        warnings.addAll(getTrackedWarnings());
+        warnings.addAll(getFalsePositiveWarnings());
+        return warnings;
+    }
+
+    public List<AuditFingerprint> getTrackedWarnings(){
+        List<AuditFingerprint> warnings = new ArrayList<AuditFingerprint>();
+        for (AuditFingerprint fingerprint : this.auditWarnings) {
+            if (fingerprint.isConfirmedWarning() && fingerprint.isTrackedInCloud()) {
+                warnings.add(fingerprint);
+            }
+        }
+        return warnings;
+    }
+
+    public List<AuditFingerprint> getFalsePositiveWarnings(){
+        List<AuditFingerprint> warnings = new ArrayList<AuditFingerprint>();
+        for (AuditFingerprint fingerprint : this.auditWarnings) {
+            if (fingerprint.isConfirmedWarning() && fingerprint.isFalsePositive()) {
+                warnings.add(fingerprint);
+            }
+        }
+        return warnings;
+    }
+
+
+
+
+
+
 
 
 }

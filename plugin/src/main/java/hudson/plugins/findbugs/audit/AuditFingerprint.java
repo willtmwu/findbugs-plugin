@@ -66,4 +66,5 @@ public class AuditFingerprint<T1 extends FileAnnotation, T2 extends Serializable
     public int compareTo(AuditFingerprint other) {
         return other.getAnnotation().compareTo(this.annotation);
     }
+
 }
