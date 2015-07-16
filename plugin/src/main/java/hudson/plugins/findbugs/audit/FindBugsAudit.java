@@ -82,20 +82,6 @@ public class FindBugsAudit implements ModelObject, Serializable{
         }
     }
 
-    @JavaScriptMethod
-    public void updateWarnings(){
-        System.out.println("Checking update history: latest " + build.getProject().getLastSuccessfulBuild().number);
-
-        //Test single first remove
-        FindBugsResult findBugsResult = (FindBugsResult) getCurrentBuildResult();
-        if (findBugsResult != null) {
-            for(FileAnnotation fileAnnotation : findBugsResult.getAnnotations()){
-                findBugsResult.removeAnnotation(fileAnnotation);
-                break;
-            }
-        }
-    }
-
     public List<AuditFingerprint> getAllWarnings(){
         List<AuditFingerprint> warnings = new ArrayList<AuditFingerprint>(this.auditWarnings);
         Collections.sort(warnings);
@@ -234,14 +220,24 @@ public class FindBugsAudit implements ModelObject, Serializable{
         System.out.println(message);
     }
 
-    public HttpResponse doForcePromotion(@QueryParameter("name") String name, @QueryParameter("serverList") String serverList) throws IOException, InterruptedException {
-        try {
-            System.out.println(name + " | " + serverList);
-            return FormValidation.ok("Success");
-        } catch (Exception e) {
-            System.out.println(e);
-            return FormValidation.error("Failure");
+    @JavaScriptMethod
+    public void boundUpdateWarnings(String message){
+        System.out.println("Removing annotations: [ID] " + message);
+    }
+
+    @JavaScriptMethod
+    public void updateWarnings(){
+        System.out.println("Checking update history: latest " + build.getProject().getLastSuccessfulBuild().number);
+
+        //Test single first remove
+        FindBugsResult findBugsResult = (FindBugsResult) getCurrentBuildResult();
+        if (findBugsResult != null) {
+            for(FileAnnotation fileAnnotation : findBugsResult.getAnnotations()){
+                findBugsResult.removeAnnotation(fileAnnotation);
+                break;
+            }
         }
     }
+
 
 }

@@ -10,31 +10,27 @@
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular.min.js"></script>
   <st:bind value="${it}" var="server"/>
   <script type="text/javascript">
+    function testAlert() {
+      alert("HELP!! ME!!! THIS ANNOYING PROGREAMMING STACK");
+    }
+
     function systemLogger(message) {
       server.boundSystemLogger(message);
     }
 
     function updateWarnings(){
-      server.updateWarnings();
-    }
+      var list = window.document.getElementsByName("unconfirmedCheckbox");
+      var message = "";
 
-
-    function testAlert() {
-      alert("HELP!! ME!!! F*CK THIS SHIT PROGRAMMING STACK");
-
-    }
-
-    function saveChecksForce() {
-      var c = window.document.getElementsByName("unconfirmedCheckbox");
-      var checkedservers = "";
-
-      for (var i = 0; i &lt; c.length; i++) {
-        checkedservers = checkedservers + c[i].id + ", ";
+      for (var i = 0; i &lt; list.length; i++) {
+        if (list[i].checked === true ) {
+          message = message + list[i].id + ", ";
+        }
       }
-
-      server.boundSystemLogger(checkedservers);
-      window.document.getElementById('ServerList').value = checkedservers;
+      server.boundUpdateWarnings(message);
+      //Refresh page
     }
+
   </script>
   <style>
 
@@ -138,18 +134,7 @@
           </j:forEach>
         </tbody>
       </table>
-      <button onclick="systemLogger('Bound Call')" style="float: right; margin:10px 5px 15px 20px;">Update Selection</button>
-
-
-
-
-      <!--TESTING ZONE-->
-      <h3>Testing Zone</h3>
-      <form style="float:right" method="post" action="forcePromotion?name=${p.name}" onsubmit="saveChecksForce()">
-        <f:submit value="${%Force promotion}" />
-        <input id="ServerList" name="serverList" type="hidden" />
-      </form>
-
+      <button onclick="updateWarnings()" style="float: right; margin:10px 5px 15px 20px;">Update Selection</button>
 
       <!-- CONFIRMED WARNING -->
       <h2>${%Confirmed Warnings}</h2>
