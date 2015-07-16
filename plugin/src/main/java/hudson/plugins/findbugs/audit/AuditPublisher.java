@@ -44,7 +44,7 @@ public class AuditPublisher extends Publisher{
         listener.getLogger().println("[FINDBUGS_AUDIT] Setting Up Auditing Process, please wait ...");
 
         //Filter based on false positives from previous audit
-        BuildResult currentBuildResult = getCurrentBuildResult();
+        /*BuildResult currentBuildResult = getCurrentBuildResult();
         FindBugsAudit previousAudit = getPreviousAudit();
         if (currentBuildResult != null && previousAudit != null) {
             List<FileAnnotation> falsePositiveAnnotations = new ArrayList<FileAnnotation>();
@@ -52,7 +52,7 @@ public class AuditPublisher extends Publisher{
                 falsePositiveAnnotations.add(auditFingerprint.getAnnotation());
             }
             currentBuildResult.removeAnnotations(falsePositiveAnnotations);
-        }
+        }*/
 
         // Add a new audit action
         build.addAction(new AuditAction(build));

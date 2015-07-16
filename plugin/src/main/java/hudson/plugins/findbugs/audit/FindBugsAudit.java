@@ -142,27 +142,27 @@ public class FindBugsAudit implements ModelObject, Serializable{
     @JavaScriptMethod
     public void boundUpdateWarnings(String message){
         System.out.println("Removing annotations: [ID] " + message);
-    }
 
-    @JavaScriptMethod
-    public void updateWarnings(){
-        System.out.println("Checking update history: latest " + build.getProject().getLastSuccessfulBuild().number);
-
-        //Test single first remove
-        FindBugsResult findBugsResult = (FindBugsResult) getCurrentBuildResult();
-        if (findBugsResult != null) {
-            for(FileAnnotation fileAnnotation : findBugsResult.getAnnotations()){
-                findBugsResult.removeAnnotation(fileAnnotation);
-                break;
+        String[] stringID = message.split(", ");
+        for (int i = 0; i< (stringID.length-1) ; i++){
+            long annotationID = Long.parseLong(stringID[i]);
+            for (AuditFingerprint fingerprint : this.auditWarnings) {
+                if (fingerprint.getAnnotation().getKey() == annotationID) {
+                    fingerprint.setFalsePositive(true);
+                }
             }
         }
+
+        FindBugsResult findBugsResult = (FindBugsResult) getCurrentBuildResult();
+        if(findBugsResult != null){
+            Collection<FileAnnotation> removeAnnotations = new ArrayList<FileAnnotation>();
+            for (AuditFingerprint fingerprint : this.getFalsePositiveWarnings()) {
+                removeAnnotations.add(fingerprint.getAnnotation());
+            }
+            findBugsResult.removeAnnotations(removeAnnotations);
+        }
+
     }
-
-
-
-
-
-
 
 
 

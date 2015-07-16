@@ -28,7 +28,8 @@
         }
       }
       server.boundUpdateWarnings(message);
-      //Refresh page
+
+      window.location.reload()
     }
 
   </script>
