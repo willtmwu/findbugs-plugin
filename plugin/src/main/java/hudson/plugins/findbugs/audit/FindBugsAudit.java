@@ -188,6 +188,8 @@ public class FindBugsAudit implements ModelObject, Serializable{
                     this.classDataLoaded = true;
                     return true;
                 }
+            } else {
+                return true;
             }
         } catch (Exception e){
             // Failed file
