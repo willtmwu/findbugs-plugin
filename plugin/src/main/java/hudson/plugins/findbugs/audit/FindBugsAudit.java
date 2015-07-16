@@ -144,7 +144,7 @@ public class FindBugsAudit implements ModelObject, Serializable{
         System.out.println("Removing annotations: [ID] " + message);
 
         String[] stringID = message.split(", ");
-        for (int i = 0; i< (stringID.length-1) ; i++){
+        for (int i = 0; i< stringID.length ; i++){
             long annotationID = Long.parseLong(stringID[i]);
             for (AuditFingerprint fingerprint : this.auditWarnings) {
                 if (fingerprint.getAnnotation().getKey() == annotationID) {
