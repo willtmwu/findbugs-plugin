@@ -38,6 +38,7 @@ public class FindBugsAudit implements ModelObject, Serializable{
 
     private AbstractBuild<?,?> build;
     private final AbstractProject<?,?> project;
+    private boolean classDataLoaded = false;
 
     private Collection<AuditFingerprint> auditWarnings;
 
@@ -51,7 +52,6 @@ public class FindBugsAudit implements ModelObject, Serializable{
             Collection<AuditFingerprint> referenceWarnings = previousAudit.getAllWarnings();
             for (AuditFingerprint fingerprint : referenceWarnings) {
                 AuditFingerprint newFingerprint = new AuditFingerprint(fingerprint.getAnnotation());
-                newFingerprint.setConfirmedWarning(fingerprint.isConfirmedWarning());
                 newFingerprint.setFalsePositive(fingerprint.isFalsePositive());
                 newFingerprint.setTrackedInCloud(fingerprint.isTrackedInCloud());
                 newFingerprint.setTrackingUrl(fingerprint.getTrackingUrl());
@@ -181,10 +181,13 @@ public class FindBugsAudit implements ModelObject, Serializable{
 
     private boolean loadAuditFingerprints(){
         try {
-            XmlFile file = getSerializationAuditFile();
-            if (file.exists()) {
-                this.auditWarnings = (Collection<AuditFingerprint>) file.read();
-                return true;
+            if (!this.classDataLoaded) {
+                XmlFile file = getSerializationAuditFile();
+                if (file.exists()) {
+                    this.auditWarnings = (Collection<AuditFingerprint>) file.read();
+                    this.classDataLoaded = true;
+                    return true;
+                }
             }
         } catch (Exception e){
             // Failed file
@@ -234,7 +237,7 @@ public class FindBugsAudit implements ModelObject, Serializable{
     public List<AuditFingerprint> getUnconfirmedWarnings(){
         List<AuditFingerprint> warnings = new ArrayList<AuditFingerprint>();
         for (AuditFingerprint fingerprint : this.auditWarnings) {
-            if (!fingerprint.isConfirmedWarning()) {
+            if (!fingerprint.isFalsePositive() && !fingerprint.isTrackedInCloud()) {
                 warnings.add(fingerprint);
             }
         }
@@ -251,7 +254,7 @@ public class FindBugsAudit implements ModelObject, Serializable{
     public List<AuditFingerprint> getTrackedWarnings(){
         List<AuditFingerprint> warnings = new ArrayList<AuditFingerprint>();
         for (AuditFingerprint fingerprint : this.auditWarnings) {
-            if (fingerprint.isConfirmedWarning() && fingerprint.isTrackedInCloud()) {
+            if (fingerprint.isTrackedInCloud()) {
                 warnings.add(fingerprint);
             }
         }
@@ -261,7 +264,7 @@ public class FindBugsAudit implements ModelObject, Serializable{
     public List<AuditFingerprint> getFalsePositiveWarnings(){
         List<AuditFingerprint> warnings = new ArrayList<AuditFingerprint>();
         for (AuditFingerprint fingerprint : this.auditWarnings) {
-            if (fingerprint.isConfirmedWarning() && fingerprint.isFalsePositive()) {
+            if (fingerprint.isFalsePositive()) {
                 warnings.add(fingerprint);
             }
         }

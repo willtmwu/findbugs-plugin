@@ -13,7 +13,6 @@ public class AuditFingerprint<T1 extends FileAnnotation, T2 extends Serializable
 
 
     private T1 annotation;
-    private boolean confirmedWarning = false;
     private boolean falsePositive = false;
     private boolean trackedInCloud = false;
     private String trackingUrl; // Bugzilla tracking
@@ -27,14 +26,6 @@ public class AuditFingerprint<T1 extends FileAnnotation, T2 extends Serializable
 
     public T1 getAnnotation(){
         return this.annotation;
-    }
-
-    public boolean isConfirmedWarning(){
-        return this.confirmedWarning;
-    }
-
-    public void setConfirmedWarning(boolean val){
-        this.confirmedWarning = val;
     }
 
     public boolean isTrackedInCloud(){
@@ -60,7 +51,6 @@ public class AuditFingerprint<T1 extends FileAnnotation, T2 extends Serializable
 
     public void setFalsePositive(boolean val){
         this.falsePositive = val;
-        this.confirmedWarning = true;
     }
 
     @Override

@@ -67,7 +67,7 @@
           <td class="pane-header">${%Type}</td>
           <td class="pane-header">${%Category}</td>
           <td class="pane-header">${%False Positive}</td>
-          <td class="pane-header">${%Bugzilla}</td>
+          <!--<td class="pane-header">${%Bugzilla}</td>-->
         </tr>
 
         <tbody>
@@ -127,9 +127,9 @@
               </td>
 
               <!--Submit Button-->
-              <td class="pane" style="text-align:center;">
+              <!--<td class="pane" style="text-align:center;">
                 <button onclick="systemLogger('Bound Call')" style="float: center;">Submit</button>
-              </td>
+              </td>-->
 
             </tr>
           </j:forEach>
@@ -205,14 +205,18 @@
               </td>
 
               <!--Status-->
-              <td class="pane">
-                <button onclick="systemLogger('Bound Call')" style="float: right;">View</button>
+              <td class="pane" style="text-align:center;">
+                <!--<button onclick="systemLogger('Bound Call')" style="float: right;">View</button>-->
+                FP
               </td>
 
             </tr>
           </j:forEach>
         </tbody>
       </table>
+      <div>
+        *FP refers to False Positive
+      </div>
 
 
     </l:main-panel>
