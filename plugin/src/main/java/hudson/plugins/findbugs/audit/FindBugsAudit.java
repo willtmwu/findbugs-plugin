@@ -162,6 +162,7 @@ public class FindBugsAudit implements ModelObject, Serializable{
             findBugsResult.removeAnnotations(removeAnnotations);
         }
 
+        serialiseAuditFingerprints();
     }
 
 
