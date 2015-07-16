@@ -60,6 +60,7 @@ public class AuditFingerprint<T1 extends FileAnnotation, T2 extends Serializable
 
     public void setFalsePositive(boolean val){
         this.falsePositive = val;
+        this.confirmedWarning = true;
     }
 
     @Override
