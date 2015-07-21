@@ -152,17 +152,16 @@ public class FindBugsAudit implements ModelObject, Serializable{
                 }
             }
         }
-
-        FindBugsResult findBugsResult = (FindBugsResult) getCurrentBuildResult();
-        if(findBugsResult != null){
-            Collection<FileAnnotation> removeAnnotations = new ArrayList<FileAnnotation>();
-            for (AuditFingerprint fingerprint : this.getFalsePositiveWarnings()) {
-                removeAnnotations.add(fingerprint.getAnnotation());
-            }
-            findBugsResult.removeAnnotations(removeAnnotations);
-        }
-
         serialiseAuditFingerprints();
+
+        BuildResult findBugsResult = getCurrentBuildResult();
+        if(findBugsResult != null){
+            Collection<FileAnnotation> removeFalsePositives = new ArrayList<FileAnnotation>();
+            for (AuditFingerprint fingerprint : this.getFalsePositiveWarnings()) {
+                removeFalsePositives.add(fingerprint.getAnnotation());
+            }
+            findBugsResult.removeAnnotations(removeFalsePositives);
+        }
     }
 
 
