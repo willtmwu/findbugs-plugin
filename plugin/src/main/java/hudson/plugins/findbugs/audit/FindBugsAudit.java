@@ -156,11 +156,13 @@ public class FindBugsAudit implements ModelObject, Serializable{
         System.out.println("Removing annotations: [ID] " + message);
 
         String[] stringID = message.split(", ");
+        Collection<FileAnnotation> removeFalsePositives = new ArrayList<FileAnnotation>();
         for (int i = 0; i< stringID.length ; i++){
             long annotationID = Long.parseLong(stringID[i]);
             for (AuditFingerprint fingerprint : this.auditWarnings) {
                 if (fingerprint.getAnnotation().getKey() == annotationID) {
                     fingerprint.setFalsePositive(true);
+                    removeFalsePositives.add(fingerprint.getAnnotation());
                 }
             }
         }
@@ -168,10 +170,6 @@ public class FindBugsAudit implements ModelObject, Serializable{
 
         BuildResult findBugsResult = getCurrentBuildResult();
         if(findBugsResult != null){
-            Collection<FileAnnotation> removeFalsePositives = new ArrayList<FileAnnotation>();
-            for (AuditFingerprint fingerprint : this.getFalsePositiveWarnings()) {
-                removeFalsePositives.add(fingerprint.getAnnotation());
-            }
             findBugsResult.removeAnnotations(removeFalsePositives);
         }
     }
