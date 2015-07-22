@@ -12,6 +12,11 @@ import hudson.plugins.analysis.util.model.AnnotationStream;
 import hudson.plugins.analysis.util.model.FileAnnotation;
 import hudson.plugins.findbugs.FindBugsResultAction;
 
+import hudson.security.ACL;
+import hudson.security.AccessControlled;
+import hudson.security.Permission;
+import jenkins.model.Jenkins;
+import org.acegisecurity.AccessDeniedException;
 import org.kohsuke.stapler.bind.JavaScriptMethod;
 import org.kohsuke.stapler.export.Exported;
 import org.kohsuke.stapler.export.ExportedBean;
@@ -156,6 +161,7 @@ public class FindBugsAudit implements ModelObject, Serializable{
     @JavaScriptMethod
     public void boundUpdateWarnings(String message){
         System.out.println("Removing annotations: [ID] " + message);
+        //Jenkins.getAuthentication().getAuthorities();
 
         String[] stringID = message.split(", ");
         Collection<FileAnnotation> removeFalsePositives = new ArrayList<FileAnnotation>();
