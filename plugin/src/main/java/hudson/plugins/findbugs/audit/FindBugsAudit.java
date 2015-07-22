@@ -145,7 +145,7 @@ public class FindBugsAudit implements ModelObject, Serializable{
     }
 
     public boolean isLatestSuccessfulBuild(){
-        return (getBuildNumber() == getLastSuccessfulBuildNumber());
+        return this.build.number == this.build.getProject().getLastSuccessfulBuild().number;
     }
 
     @JavaScriptMethod
