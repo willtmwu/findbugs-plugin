@@ -47,6 +47,8 @@ public class FindBugsAudit implements ModelObject, Serializable{
     private int previousNumberOfConfirmedWarnings = 0;
     private int newNumberOfUnconfirmedWarnings = 0;
     private int newNumberOfConfirmedWarnings = 0;
+    private int fixedNumberOfUnconfirmedWarnings = 0;
+    private int fixedNumberOfConfirmedWarnings = 0;
 
     public FindBugsAudit(AbstractBuild<?,?> build){
         this.build = build;
@@ -283,6 +285,26 @@ public class FindBugsAudit implements ModelObject, Serializable{
 
     // Methods for the summary table
     public int getPreviousNumberOfUnconfirmedWarnings(){
+        return previousNumberOfUnconfirmedWarnings;
+    }
+
+    public int getPreviousNumberOfConfirmedWarnings(){
+        return previousNumberOfUnconfirmedWarnings;
+    }
+
+    public int getNewNumberOfUnconfirmedWarnings(){
+        return previousNumberOfUnconfirmedWarnings;
+    }
+
+    public int getNewNumberOfConfirmedWarnings(){
+        return previousNumberOfUnconfirmedWarnings;
+    }
+
+    public int getFixedNumberOfUnconfirmedWarnings(){
+        return previousNumberOfUnconfirmedWarnings;
+    }
+
+    public int getFixedNumberOfConfirmedWarnings(){
         return previousNumberOfUnconfirmedWarnings;
     }
 

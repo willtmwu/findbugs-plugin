@@ -15,7 +15,7 @@ public class AuditFingerprint<T1 extends FileAnnotation, T2 extends Serializable
     private T1 annotation;
     private boolean falsePositive = false;
     private boolean trackedInCloud = false;
-    private String trackingUrl; // Bugzilla tracking
+    private String trackingUrl = ""; // Bugzilla tracking
 
     private T2 fingerprint; // Unique fingerprint depending on what it will be ... might need to be abstract and
     //let the implementer decided on the outcome.
