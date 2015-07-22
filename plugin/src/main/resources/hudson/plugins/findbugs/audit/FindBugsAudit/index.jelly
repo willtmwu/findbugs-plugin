@@ -135,7 +135,11 @@
           </j:forEach>
         </tbody>
       </table>
-      <button onclick="updateWarnings()" style="float: right; margin:10px 5px 15px 20px;">Update Selection</button>
+
+      <j:if test="${it.buildNumber == it.lastSuccessfulBuildNumber}">
+        <button onclick="updateWarnings()" style="float: right; margin:10px 5px 15px 20px;">Update Selection</button>
+      </j:if>
+
 
       <!-- CONFIRMED WARNING -->
       <h2>${%Confirmed Warnings}</h2>
