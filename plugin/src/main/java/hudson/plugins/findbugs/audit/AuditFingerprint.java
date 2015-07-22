@@ -41,7 +41,7 @@ public class AuditFingerprint<T1 extends FileAnnotation, T2 extends Serializable
     }
 
     public void setTrackingUrl(String url){
-        if (!("").equals(url)) {
+        if (url == null || !("").equals(url)) {
             this.trackingUrl = url;
             this.trackedInCloud = true;
         }
