@@ -42,13 +42,19 @@ public class FindBugsAudit implements ModelObject, Serializable{
 
     private Collection<AuditFingerprint> auditWarnings;
 
+    //For the summary table
+    private int previousNumberOfUnconfirmedWarnings = 0;
+    private int previousNumberOfConfirmedWarnings = 0;
+    private int newNumberOfUnconfirmedWarnings = 0;
+    private int newNumberOfConfirmedWarnings = 0;
+
     public FindBugsAudit(AbstractBuild<?,?> build){
         this.build = build;
         this.project = build.getProject();
         this.auditWarnings = new ArrayList<AuditFingerprint>();
 
         FindBugsAudit previousAudit = getReferenceAudit();
-        if (previousAudit != null && previousAudit.getAllWarnings().size() > 0) {
+        if (previousAudit != null) {
             Collection<AuditFingerprint> referenceWarnings = previousAudit.getAllWarnings();
             for (AuditFingerprint fingerprint : referenceWarnings) {
                 AuditFingerprint newFingerprint = new AuditFingerprint(fingerprint.getAnnotation());
@@ -57,8 +63,12 @@ public class FindBugsAudit implements ModelObject, Serializable{
                 newFingerprint.setTrackingUrl(fingerprint.getTrackingUrl());
                 this.auditWarnings.add(newFingerprint);
             }
+            previousNumberOfUnconfirmedWarnings = previousAudit.getUnconfirmedWarnings().size();
+            previousNumberOfConfirmedWarnings = previousAudit.getConfirmedWarnings().size();
 
-            for (FileAnnotation annotation : getCurrentBuildResult().getNewWarnings()) {
+            Collection<FileAnnotation> newWarningsForCurrentBuild = getCurrentBuildResult().getNewWarnings();
+            newNumberOfUnconfirmedWarnings = newWarningsForCurrentBuild.size();
+            for (FileAnnotation annotation : newWarningsForCurrentBuild) {
                 this.auditWarnings.add(new AuditFingerprint(annotation));
             }
 
@@ -126,7 +136,7 @@ public class FindBugsAudit implements ModelObject, Serializable{
         return this.build.getPreviousSuccessfulBuild().number;
     }
 
-    public int getLastSuccessfulBuildNumber(){
+    public int getLastSuccessfulBuildNumber() {
         return this.project.getLastSuccessfulBuild().number;
     }
 
@@ -271,7 +281,10 @@ public class FindBugsAudit implements ModelObject, Serializable{
     }
 
 
-
+    // Methods for the summary table
+    public int getPreviousNumberOfUnconfirmedWarnings(){
+        return previousNumberOfUnconfirmedWarnings;
+    }
 
 
 
