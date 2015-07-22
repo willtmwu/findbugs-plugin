@@ -48,10 +48,63 @@
 
       <h1>${%FindBugs Auditing} for Build ${it.buildNumber}</h1>
 
+      <!-- SUMMARY TABLE -->
       <h2>${%Summary}</h2>
-      <!-- Summary Table -->
-      <!-- TODO Later will need to figure out calculations -->
+      <table class="pane sortable" id="auditUnconfirmedWarnings">
+      <tr>
+        <td class="pane-header">${%Warnings}</td>
+        <td class="pane-header">${%Previous}</td>
+        <td class="pane-header">${%New}</td>
+        <td class="pane-header">${%Fixed}</td>
+      </tr>
+      <tbody>
+        <tr>
+          <td class="pane">
+            <div>
+              Unconfirmed
+            </div>
+          </td>
+          <td class="pane">
+            <div tooltip="${it.previousUnconfirmedTooltip}">
+              ${it.previousNumberOfUnconfirmedWarnings}
+            </div>
+          </td>
+          <td class="pane">
+            <div tooltip="${it.newUnconfirmedTooltip}">
+              ${it.newNumberOfUnconfirmedWarnings}
+            </div>
+          </td>
+          <td class="pane">
+            <div tooltip="${it.fixedUnconfirmedTooltip}">
+              ${it.fixedNumberOfUnconfirmedWarnings}
+            </div>
+          </td>
+        </tr>
 
+        <tr>
+          <td class="pane">
+            <div>
+              Confirmed
+            </div>
+          </td>
+          <td class="pane">
+            <div tooltip="${it.previousConfirmedTooltip}">
+              ${it.previousNumberOfConfirmedWarnings}
+            </div>
+          </td>
+          <td class="pane">
+            <div tooltip="${it.newConfirmedTooltip}">
+              ${it.newNumberOfConfirmedWarnings}
+            </div>
+          </td>
+          <td class="pane">
+            <div tooltip="${it.fixedConfirmedTooltip}">
+              ${it.fixedNumberOfConfirmedWarnings}
+            </div>
+          </td>
+        </tr>
+      </tbody>
+      </table>
 
       <!-- UNCONFIRMED WARNINGS -->
       <h2>${%Unconfirmed Warnings}</h2>

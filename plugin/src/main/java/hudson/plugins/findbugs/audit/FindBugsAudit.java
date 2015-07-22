@@ -1,6 +1,5 @@
 package hudson.plugins.findbugs.audit;
 
-import com.google.common.collect.ImmutableSortedSet;
 import com.thoughtworks.xstream.XStream;
 import hudson.XmlFile;
 import hudson.model.AbstractBuild;
@@ -11,12 +10,8 @@ import hudson.plugins.analysis.core.AbstractResultAction;
 import hudson.plugins.analysis.core.BuildResult;
 import hudson.plugins.analysis.util.model.AnnotationStream;
 import hudson.plugins.analysis.util.model.FileAnnotation;
-import hudson.plugins.findbugs.FindBugsResult;
 import hudson.plugins.findbugs.FindBugsResultAction;
-import hudson.util.FormValidation;
 
-import org.kohsuke.stapler.HttpResponse;
-import org.kohsuke.stapler.QueryParameter;
 import org.kohsuke.stapler.bind.JavaScriptMethod;
 import org.kohsuke.stapler.export.Exported;
 import org.kohsuke.stapler.export.ExportedBean;
@@ -38,7 +33,7 @@ public class FindBugsAudit implements ModelObject, Serializable{
 
     private AbstractBuild<?,?> build;
     private final AbstractProject<?,?> project;
-    private boolean classDataLoaded = false;
+    private boolean auditFingerprintsLoaded = false;
 
     private Collection<AuditFingerprint> auditWarnings;
 
@@ -49,6 +44,8 @@ public class FindBugsAudit implements ModelObject, Serializable{
     private int newNumberOfConfirmedWarnings = 0;
     private int fixedNumberOfUnconfirmedWarnings = 0;
     private int fixedNumberOfConfirmedWarnings = 0;
+
+
 
     public FindBugsAudit(AbstractBuild<?,?> build){
         this.build = build;
@@ -65,36 +62,41 @@ public class FindBugsAudit implements ModelObject, Serializable{
                 newFingerprint.setTrackingUrl(fingerprint.getTrackingUrl());
                 this.auditWarnings.add(newFingerprint);
             }
-            previousNumberOfUnconfirmedWarnings = previousAudit.getUnconfirmedWarnings().size();
-            previousNumberOfConfirmedWarnings = previousAudit.getConfirmedWarnings().size();
+
 
             Collection<FileAnnotation> newWarningsForCurrentBuild = getCurrentBuildResult().getNewWarnings();
-            newNumberOfUnconfirmedWarnings = newWarningsForCurrentBuild.size();
             for (FileAnnotation annotation : newWarningsForCurrentBuild) {
                 this.auditWarnings.add(new AuditFingerprint(annotation));
             }
 
+            // These numbers are serialised into build.xml
+            previousNumberOfUnconfirmedWarnings = previousAudit.getUnconfirmedWarnings().size();
+            previousNumberOfConfirmedWarnings = previousAudit.getConfirmedWarnings().size();
+            newNumberOfUnconfirmedWarnings = newWarningsForCurrentBuild.size();
+            //fixedNumberOfUnconfirmedWarnings
+            //fixedNumberOfConfirmedWarnings
         } else {
-            BuildResult currentBuildResult = getCurrentBuildResult();
-            if (currentBuildResult != null) {
-                for (FileAnnotation annotations : currentBuildResult.getAnnotations()) {
-                    auditWarnings.add(new AuditFingerprint(annotations));
-                }
-            }
+            copyCurrentBuildResultAnnotations();
         }
         serialiseAuditFingerprints();
     }
 
     public void loadClassData(){
         if (!loadAuditFingerprints()){
-            BuildResult currentBuildResult = getCurrentBuildResult();
-            this.auditWarnings = new ArrayList<AuditFingerprint>();
-            if (currentBuildResult != null) {
-                for (FileAnnotation annotations : currentBuildResult.getAnnotations()) {
-                    auditWarnings.add(new AuditFingerprint(annotations));
-                }
-            }
+            copyCurrentBuildResultAnnotations();
             serialiseAuditFingerprints();
+        }
+    }
+
+
+
+    private void copyCurrentBuildResultAnnotations(){
+        BuildResult currentBuildResult = getCurrentBuildResult();
+        this.auditWarnings = new ArrayList<AuditFingerprint>();
+        if (currentBuildResult != null) {
+            for (FileAnnotation annotations : currentBuildResult.getAnnotations()) {
+                auditWarnings.add(new AuditFingerprint(annotations));
+            }
         }
     }
 
@@ -163,6 +165,8 @@ public class FindBugsAudit implements ModelObject, Serializable{
                 if (fingerprint.getAnnotation().getKey() == annotationID) {
                     fingerprint.setFalsePositive(true);
                     removeFalsePositives.add(fingerprint.getAnnotation());
+                    newNumberOfConfirmedWarnings++;
+                    fixedNumberOfUnconfirmedWarnings++;
                 }
             }
         }
@@ -173,11 +177,6 @@ public class FindBugsAudit implements ModelObject, Serializable{
             findBugsResult.removeAnnotations(removeFalsePositives);
         }
     }
-
-
-
-
-
 
     private void serialiseAuditFingerprints(){
         try {
@@ -192,9 +191,10 @@ public class FindBugsAudit implements ModelObject, Serializable{
         try {
             XmlFile file = getSerializationAuditFile();
             if (file.exists()) {
-                if (!this.classDataLoaded) {
+                if (!this.auditFingerprintsLoaded) {
                     this.auditWarnings = (Collection<AuditFingerprint>) file.read();
-                    this.classDataLoaded = true;
+                    this.auditFingerprintsLoaded = true;
+                    calculateWarningNumbers();
                 }
                 return true;
             }
@@ -203,6 +203,13 @@ public class FindBugsAudit implements ModelObject, Serializable{
             System.out.println(e);
         }
         return false;
+    }
+
+    private void calculateWarningNumbers(){
+        FindBugsAudit previousAudit = getReferenceAudit();
+        if (previousAudit != null){
+            this.newNumberOfConfirmedWarnings = getConfirmedWarnings().size() - previousAudit.getConfirmedWarnings().size();
+        }
     }
 
     private XmlFile getSerializationAuditFile(){
@@ -236,7 +243,7 @@ public class FindBugsAudit implements ModelObject, Serializable{
 
 
 
-
+    // Stuff mainly for index.jelly
     public List<AuditFingerprint> getAllWarnings(){
         List<AuditFingerprint> warnings = new ArrayList<AuditFingerprint>(this.auditWarnings);
         Collections.sort(warnings);
@@ -286,28 +293,53 @@ public class FindBugsAudit implements ModelObject, Serializable{
         return previousNumberOfUnconfirmedWarnings;
     }
 
+    public String getPreviousUnconfirmedTooltip(){
+        return "Previous number of unconfirmed warnings";
+    }
+
     public int getPreviousNumberOfConfirmedWarnings(){
-        return previousNumberOfUnconfirmedWarnings;
+        return previousNumberOfConfirmedWarnings;
+    }
+
+    public String getPreviousConfirmedTooltip(){
+        return "Previous number of confirmed warnings";
     }
 
     public int getNewNumberOfUnconfirmedWarnings(){
-        return previousNumberOfUnconfirmedWarnings;
+        return newNumberOfUnconfirmedWarnings;
+    }
+
+    public String getNewUnconfirmedTooltip(){
+        return "New number of warnings from build result " + getBuildNumber();
     }
 
     public int getNewNumberOfConfirmedWarnings(){
-        return previousNumberOfUnconfirmedWarnings;
+        return newNumberOfConfirmedWarnings;
+    }
+
+    public String getNewConfirmedTooltip(){
+        return "Updated based on auditing in this build only";
     }
 
     public int getFixedNumberOfUnconfirmedWarnings(){
-        return previousNumberOfUnconfirmedWarnings;
+        return fixedNumberOfUnconfirmedWarnings;
+    }
+
+    public String getFixedUnconfirmedTooltip(){
+        return "Warnings no longer present in this build + confirmed FP by this audit";
     }
 
     public int getFixedNumberOfConfirmedWarnings(){
-        return previousNumberOfUnconfirmedWarnings;
+        return fixedNumberOfConfirmedWarnings;
     }
 
+    public String getFixedConfirmedTooltip(){
+        return "Confirmed false positives no longer in the current build";
+    }
 
-
+    public String getUpdateSelectionButtonTooltip(){
+        return "Only activated on latest build, graph may update in next build";
+    }
 
 
 }

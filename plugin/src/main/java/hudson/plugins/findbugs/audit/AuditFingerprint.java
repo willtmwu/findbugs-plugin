@@ -13,8 +13,8 @@ public class AuditFingerprint<T1 extends FileAnnotation, T2 extends Serializable
 
 
     private T1 annotation;
-    private boolean falsePositive = false;
-    private boolean trackedInCloud = false;
+    private boolean falsePositive = false; // If an audit fingerprint become FP true, it should be automatically tracked to FP cloud
+    private boolean trackedInCloud = false; // This tracking refers to Bugzilla not the general FP cloud, will be needed when something is not FP but is an actual issue
     private String trackingUrl = ""; // Bugzilla tracking
 
     private T2 fingerprint; // Unique fingerprint depending on what it will be ... might need to be abstract and
