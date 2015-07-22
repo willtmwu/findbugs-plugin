@@ -190,7 +190,9 @@
       </table>
 
       <j:if test="${it.isLatestSuccessfulBuild()}">
-        <button onclick="updateWarnings()" tooltip="${it.updateSelectionButtonTooltip()}" style="float: right; margin:10px 5px 15px 20px;">Update Selection</button>
+        <div tooltip="${it.updateSelectionButtonTooltip()}">
+          <button onclick="updateWarnings()"  style="float: right; margin:10px 5px 15px 20px;">Update Selection</button>
+        </div>
       </j:if>
 
 
