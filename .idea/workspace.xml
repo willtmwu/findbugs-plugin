@@ -355,8 +355,8 @@
       <file leaf-file-name="index.jelly" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/plugin/src/main/resources/hudson/plugins/findbugs/audit/FindBugsAudit/index.jelly">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.575">
-              <caret line="194" column="14" selection-start-line="194" selection-start-column="14" selection-end-line="194" selection-end-column="14" />
+            <state vertical-scroll-proportion="0.7">
+              <caret line="193" column="13" selection-start-line="193" selection-start-column="13" selection-end-line="193" selection-end-column="13" />
               <folding />
             </state>
           </provider>
@@ -366,7 +366,7 @@
         <entry file="file://$PROJECT_DIR$/plugin/src/main/java/hudson/plugins/findbugs/audit/FindBugsAudit.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="171" column="34" selection-start-line="171" selection-start-column="34" selection-end-line="171" selection-end-column="34" />
+              <caret line="345" column="18" selection-start-line="345" selection-start-column="18" selection-end-line="345" selection-end-column="18" />
               <folding>
                 <element signature="e#1146#1193#0" expanded="true" />
                 <element signature="e#4903#4904#0" expanded="true" />
@@ -1717,7 +1717,7 @@
     <entry file="file://$PROJECT_DIR$/plugin/src/main/java/hudson/plugins/findbugs/audit/FindBugsAudit.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="171" column="34" selection-start-line="171" selection-start-column="34" selection-end-line="171" selection-end-column="34" />
+          <caret line="345" column="18" selection-start-line="345" selection-start-column="18" selection-end-line="345" selection-end-column="18" />
           <folding>
             <element signature="e#1146#1193#0" expanded="true" />
             <element signature="e#4903#4904#0" expanded="true" />
@@ -1767,8 +1767,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/plugin/src/main/resources/hudson/plugins/findbugs/audit/FindBugsAudit/index.jelly">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.575">
-          <caret line="194" column="14" selection-start-line="194" selection-start-column="14" selection-end-line="194" selection-end-column="14" />
+        <state vertical-scroll-proportion="0.7">
+          <caret line="193" column="13" selection-start-line="193" selection-start-column="13" selection-end-line="193" selection-end-column="13" />
           <folding />
         </state>
       </provider>

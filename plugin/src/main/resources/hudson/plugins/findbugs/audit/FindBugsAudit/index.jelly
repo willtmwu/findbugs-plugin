@@ -50,7 +50,7 @@
 
       <!-- SUMMARY TABLE -->
       <h2>${%Summary}</h2>
-      <table class="pane sortable" id="auditUnconfirmedWarnings">
+      <table class="pane sortable" id="summaryTable">
       <tr>
         <td class="pane-header">${%Warnings}</td>
         <td class="pane-header">${%Previous}</td>
@@ -190,9 +190,7 @@
       </table>
 
       <j:if test="${it.isLatestSuccessfulBuild()}">
-        <div tooltip="${it.updateSelectionButtonTooltip()}">
-          <button onclick="updateWarnings()"  style="float: right; margin:10px 5px 15px 20px;">Update Selection</button>
-        </div>
+        <button onclick="updateWarnings()" title="${it.updateSelectionButtonTooltip()}" style="float: right; margin:10px 5px 15px 20px;">Update Selection</button>
       </j:if>
 
 
