@@ -82,7 +82,7 @@ public class FindBugsAudit implements ModelObject, Serializable{
             newNumberOfUnconfirmedWarnings = newWarningsForCurrentBuild.size();
             fixedNumberOfUnconfirmedWarnings = getCurrentBuildResult().getNumberOfFixedWarnings();
             //Essentially the number that was not able to be removed because it does not exist anymore
-            fixedNumberOfConfirmedWarnings = removedNumberOfAnnotationsDuringFiltering;
+            fixedNumberOfConfirmedWarnings = removedNumberOfAnnotationsDuringFiltering;   
         } else {
             copyCurrentBuildResultAnnotations();
         }
