@@ -62,14 +62,16 @@ public class FindBugsAudit implements ModelObject, Serializable{
         FindBugsAudit previousAudit = getReferenceAudit();
         if (previousAudit != null) {
             Collection<AuditFingerprint> referenceWarnings = previousAudit.getAllWarnings();
-            for (AuditFingerprint fingerprint : referenceWarnings) {
-                AuditFingerprint newFingerprint = new AuditFingerprint(fingerprint.getAnnotation());
-                newFingerprint.setFalsePositive(fingerprint.isFalsePositive());
-                newFingerprint.setTrackedInCloud(fingerprint.isTrackedInCloud());
-                newFingerprint.setTrackingUrl(fingerprint.getTrackingUrl());
-                this.auditWarnings.add(newFingerprint);
+            copyCurrentBuildResultAnnotations();
+            for (AuditFingerprint currentFingerprint : this.auditWarnings) {
+                for (AuditFingerprint referenceFingerprint : referenceWarnings) {
+                    if (currentFingerprint.getAnnotation().equals(referenceFingerprint.getAnnotation())) {
+                        currentFingerprint.setFalsePositive(referenceFingerprint.isFalsePositive());
+                        currentFingerprint.setTrackedInCloud(referenceFingerprint.isTrackedInCloud());
+                        currentFingerprint.setTrackingUrl(referenceFingerprint.getTrackingUrl());
+                    }
+                }
             }
-
 
             Collection<FileAnnotation> newWarningsForCurrentBuild = getCurrentBuildResult().getNewWarnings();
             for (FileAnnotation annotation : newWarningsForCurrentBuild) {
