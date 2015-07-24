@@ -221,8 +221,8 @@ public class FindBugsAudit implements ModelObject, Serializable{
     private void calculateWarningNumbers(){
         FindBugsAudit previousAudit = getReferenceAudit();
         if (previousAudit != null){
-            int delta = getConfirmedWarnings().size() - previousAudit.getConfirmedWarnings().size();
-            this.newNumberOfConfirmedWarnings = delta > 0 ? delta : 0;
+            int delta = getConfirmedWarnings().size() - (previousAudit.getConfirmedWarnings().size() - fixedNumberOfConfirmedWarnings);
+            this.newNumberOfConfirmedWarnings = delta;
         } else {
             this.newNumberOfConfirmedWarnings = getConfirmedWarnings().size();
         }
