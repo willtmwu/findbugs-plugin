@@ -195,7 +195,6 @@ public class FindBugsAudit implements ModelObject, Serializable{
         try {
             XmlFile file = getSerializationAuditFile();
             file.write(this.auditWarnings);
-            file.write(this.newNumberOfConfirmedWarnings);
         } catch (IOException io){
             System.out.println(io);
         }
@@ -207,9 +206,8 @@ public class FindBugsAudit implements ModelObject, Serializable{
             if (file.exists()) {
                 if (!this.auditFingerprintsLoaded) {
                     this.auditWarnings = (Collection<AuditFingerprint>) file.read();
-                    this.newNumberOfConfirmedWarnings = (Integer) file.read();
                     this.auditFingerprintsLoaded = true;
-                    //calculateWarningNumbers();
+                    calculateWarningNumbers();
                 }
                 return true;
             }
