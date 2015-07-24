@@ -40,22 +40,27 @@ public class AuditPublisher extends Publisher{
 
     @Override
     public boolean perform(AbstractBuild<?, ?> build, Launcher launcher, BuildListener listener) throws InterruptedException, IOException {
+        if (build == null) {
+            return true;
+        }
+
         this.build = build;
         listener.getLogger().println("[FINDBUGS_AUDIT] Setting Up Auditing Process, please wait ...");
 
         //Filter based on false positives from previous audit
         BuildResult currentBuildResult = getCurrentBuildResult();
         FindBugsAudit previousAudit = getPreviousAudit();
+        int removedNumberOfAnnotations = 0;
         if (currentBuildResult != null && previousAudit != null) {
             List<FileAnnotation> falsePositiveAnnotations = new ArrayList<FileAnnotation>();
             for (AuditFingerprint auditFingerprint : getPreviousAudit().getFalsePositiveWarnings()) {
                 falsePositiveAnnotations.add(auditFingerprint.getAnnotation());
             }
-            currentBuildResult.removeAnnotations(falsePositiveAnnotations);
+            removedNumberOfAnnotations = currentBuildResult.removeAnnotations(falsePositiveAnnotations);
         }
 
         // Add a new audit action
-        build.addAction(new AuditAction(build));
+        build.addAction(new AuditAction(build, removedNumberOfAnnotations));
 
         return true;
     }

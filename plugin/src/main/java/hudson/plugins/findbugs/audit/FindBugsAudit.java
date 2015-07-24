@@ -50,9 +50,11 @@ public class FindBugsAudit implements ModelObject, Serializable{
     private int fixedNumberOfUnconfirmedWarnings = 0;
     private int fixedNumberOfConfirmedWarnings = 0;
 
-
-
     public FindBugsAudit(AbstractBuild<?,?> build){
+        this(build, 0);
+    }
+
+    public FindBugsAudit(AbstractBuild<?,?> build, int removedNumberOfAnnotationsDuringFiltering){
         this.build = build;
         this.project = build.getProject();
         this.auditWarnings = new ArrayList<AuditFingerprint>();
@@ -78,8 +80,9 @@ public class FindBugsAudit implements ModelObject, Serializable{
             previousNumberOfUnconfirmedWarnings = previousAudit.getUnconfirmedWarnings().size();
             previousNumberOfConfirmedWarnings = previousAudit.getConfirmedWarnings().size();
             newNumberOfUnconfirmedWarnings = newWarningsForCurrentBuild.size();
-            //fixedNumberOfUnconfirmedWarnings
-            //fixedNumberOfConfirmedWarnings
+            fixedNumberOfUnconfirmedWarnings = getCurrentBuildResult().getNumberOfFixedWarnings();
+            //Essentially the number that was not able to be removed because it does not exist anymore
+            fixedNumberOfConfirmedWarnings = removedNumberOfAnnotationsDuringFiltering;
         } else {
             copyCurrentBuildResultAnnotations();
         }
@@ -215,7 +218,10 @@ public class FindBugsAudit implements ModelObject, Serializable{
         FindBugsAudit previousAudit = getReferenceAudit();
         if (previousAudit != null){
             this.newNumberOfConfirmedWarnings = getConfirmedWarnings().size() - previousAudit.getConfirmedWarnings().size();
+        } else {
+            this.newNumberOfConfirmedWarnings = getConfirmedWarnings().size();
         }
+        this.fixedNumberOfUnconfirmedWarnings += this.newNumberOfConfirmedWarnings;
     }
 
     private XmlFile getSerializationAuditFile(){
