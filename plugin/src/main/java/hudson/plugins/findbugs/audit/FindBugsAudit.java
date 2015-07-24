@@ -54,7 +54,7 @@ public class FindBugsAudit implements ModelObject, Serializable{
         this(build, 0);
     }
 
-    public FindBugsAudit(AbstractBuild<?,?> build, int removedNumberOfAnnotationsDuringFiltering){
+    public FindBugsAudit(AbstractBuild<?,?> build, int deltaNumberOfAnnotationsDuringFiltering){
         this.build = build;
         this.project = build.getProject();
         this.auditWarnings = new ArrayList<AuditFingerprint>();
@@ -82,7 +82,7 @@ public class FindBugsAudit implements ModelObject, Serializable{
             newNumberOfUnconfirmedWarnings = newWarningsForCurrentBuild.size();
             fixedNumberOfUnconfirmedWarnings = getCurrentBuildResult().getNumberOfFixedWarnings();
             //Essentially the number that was not able to be removed because it does not exist anymore
-            fixedNumberOfConfirmedWarnings = removedNumberOfAnnotationsDuringFiltering;   
+            fixedNumberOfConfirmedWarnings = deltaNumberOfAnnotationsDuringFiltering;
         } else {
             copyCurrentBuildResultAnnotations();
         }
