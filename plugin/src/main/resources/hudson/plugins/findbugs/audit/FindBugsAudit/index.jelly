@@ -34,18 +34,11 @@
 
   </script>
   <style>
-
-
   </style>
 
   <l:layout norefresh="true">
     <st:include it="${it.build}" page="sidepanel.jelly" />
     <l:main-panel>
-
-
-      <!--EVERYTHING ON 1 CLEAN PAGE-->
-
-
       <h1>${%FindBugs Auditing} for Build ${it.buildNumber}</h1>
 
       <!-- SUMMARY TABLE -->
@@ -109,7 +102,6 @@
       <!-- UNCONFIRMED WARNINGS -->
       <h2>${%Unconfirmed Warnings}</h2>
       <table class="pane sortable" id="auditUnconfirmedWarnings">
-
         <tr>
           <td class="pane-header">${%File}</td>
           <td class="pane-header">${%Module}</td>
@@ -120,7 +112,7 @@
           <td class="pane-header">${%Type}</td>
           <td class="pane-header">${%Category}</td>
           <td class="pane-header">${%False Positive}</td>
-          <!--<td class="pane-header">${%Bugzilla}</td>-->
+          <!--<td class="pane-header">${%Bugzilla Issue}</td>-->
         </tr>
 
         <tbody>
@@ -181,7 +173,7 @@
 
               <!--Submit Button-->
               <!--<td class="pane" style="text-align:center;">
-                <button onclick="systemLogger('Bound Call')" style="float: center;">Submit</button>
+                <button onclick="systemLogger('Bound Call')" style="float: center;">Submit </button>
               </td>-->
 
             </tr>

@@ -293,7 +293,6 @@ public class FindBugsAudit implements ModelObject, Serializable{
         return warnings;
     }
 
-
     // Methods for the summary table
     public int getPreviousNumberOfUnconfirmedWarnings(){
         return previousNumberOfUnconfirmedWarnings;

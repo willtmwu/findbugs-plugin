@@ -19,6 +19,8 @@ public class AuditFingerprint<T1 extends FileAnnotation, T2 extends Serializable
 
     private T2 fingerprint; // Unique fingerprint depending on what it will be ... might need to be abstract and
     //let the implementer decided on the outcome.
+    // This fingerprint will later need to update the actual file annotation itself
+    // Should if possible, merge both byte and source code
 
     public AuditFingerprint(T1 annotation){
         this.annotation = annotation;
