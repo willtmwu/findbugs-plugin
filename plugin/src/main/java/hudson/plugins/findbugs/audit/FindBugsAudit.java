@@ -66,7 +66,6 @@ public class FindBugsAudit implements ModelObject, Serializable{
                 this.auditWarnings.add(newFingerprint);
             }
 
-
             for (AuditFingerprint currentFingerprint : this.auditWarnings) {
                 for (FileAnnotation deltaAnnotation : deltaNumberOfAnnotationsDuringFiltering) {
                     if (currentFingerprint.getAnnotation().equals(deltaAnnotation)) {

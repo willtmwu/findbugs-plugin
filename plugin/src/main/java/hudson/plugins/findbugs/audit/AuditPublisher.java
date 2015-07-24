@@ -50,7 +50,7 @@ public class AuditPublisher extends Publisher{
         //Filter based on false positives from previous audit
         BuildResult currentBuildResult = getCurrentBuildResult();
         FindBugsAudit previousAudit = getPreviousAudit();
-        Collection<FileAnnotation> deltaNumberOfAnnotationsDuringFiltering;
+        Collection<FileAnnotation> deltaNumberOfAnnotationsDuringFiltering = new ArrayList<FileAnnotation>();
         if (currentBuildResult != null && previousAudit != null) {
             List<FileAnnotation> falsePositiveAnnotations = new ArrayList<FileAnnotation>();
             for (AuditFingerprint auditFingerprint : getPreviousAudit().getFalsePositiveWarnings()) {

@@ -21,11 +21,6 @@ public class AuditAction implements Action, StaplerProxy {
         this.build = null;
     }
 
-    public AuditAction(AbstractBuild<?,?> build){
-        this.build = build;
-        this.auditView = new FindBugsAudit(build);
-    }
-
     public AuditAction(AbstractBuild<?,?> build, Collection<FileAnnotation> deltaNumberOfAnnotationsDuringFiltering){
         this.build = build;
         this.auditView = new FindBugsAudit(build, deltaNumberOfAnnotationsDuringFiltering);
