@@ -66,10 +66,11 @@ public class FindBugsAudit implements ModelObject, Serializable{
                 this.auditWarnings.add(newFingerprint);
             }
 
-            for (AuditFingerprint currentFingerprint : this.auditWarnings) {
+            for (Iterator<AuditFingerprint> iterator = this.auditWarnings.iterator(); iterator.hasNext();){
+                AuditFingerprint currentFingerprint = iterator.next();
                 for (FileAnnotation deltaAnnotation : deltaNumberOfAnnotationsDuringFiltering) {
                     if (currentFingerprint.getAnnotation().equals(deltaAnnotation)) {
-                        this.auditWarnings.remove(currentFingerprint);
+                        iterator.remove();
                     }
                 }
             }

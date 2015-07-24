@@ -348,54 +348,54 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="FindBugsAudit.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="FindBugsAudit.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/plugin/src/main/java/hudson/plugins/findbugs/audit/FindBugsAudit.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="67" column="0" selection-start-line="67" selection-start-column="0" selection-end-line="67" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.16">
+              <caret line="66" column="13" selection-start-line="66" selection-start-column="13" selection-end-line="66" selection-end-column="13" />
               <folding>
                 <element signature="e#1146#1193#0" expanded="true" />
-                <element signature="e#5557#5558#0" expanded="true" />
-                <element signature="e#5599#5600#0" expanded="true" />
-                <element signature="e#5644#5645#0" expanded="true" />
-                <element signature="e#5677#5678#0" expanded="true" />
-                <element signature="e#5725#5726#0" expanded="true" />
-                <element signature="e#5765#5766#0" expanded="true" />
-                <element signature="e#5807#5808#0" expanded="true" />
-                <element signature="e#5876#5877#0" expanded="true" />
-                <element signature="e#5925#5926#0" expanded="true" />
-                <element signature="e#5992#5993#0" expanded="true" />
-                <element signature="e#6212#6213#0" expanded="true" />
-                <element signature="e#6255#6256#0" expanded="true" />
-                <element signature="e#9186#9187#0" expanded="true" />
-                <element signature="e#9223#9224#0" expanded="true" />
-                <element signature="e#9380#9398#0" expanded="true" />
-                <element signature="e#9603#9621#0" expanded="true" />
-                <element signature="e#9988#10006#0" expanded="true" />
-                <element signature="e#10253#10271#0" expanded="true" />
-                <element signature="e#10607#10625#0" expanded="true" />
-                <element signature="e#10935#10936#0" expanded="true" />
-                <element signature="e#10993#10994#0" expanded="true" />
-                <element signature="e#11045#11046#0" expanded="true" />
-                <element signature="e#11109#11110#0" expanded="true" />
-                <element signature="e#11165#11166#0" expanded="true" />
-                <element signature="e#11221#11222#0" expanded="true" />
-                <element signature="e#11271#11272#0" expanded="true" />
-                <element signature="e#11333#11334#0" expanded="true" />
-                <element signature="e#11386#11387#0" expanded="true" />
-                <element signature="e#11439#11440#0" expanded="true" />
-                <element signature="e#11486#11487#0" expanded="true" />
-                <element signature="e#11571#11572#0" expanded="true" />
-                <element signature="e#11622#11623#0" expanded="true" />
-                <element signature="e#11673#11674#0" expanded="true" />
-                <element signature="e#11718#11719#0" expanded="true" />
-                <element signature="e#11787#11788#0" expanded="true" />
-                <element signature="e#11842#11843#0" expanded="true" />
-                <element signature="e#11897#11898#0" expanded="true" />
-                <element signature="e#12093#12094#0" expanded="true" />
-                <element signature="e#12146#12147#0" expanded="true" />
-                <element signature="e#12193#12194#0" expanded="true" />
-                <element signature="e#12274#12275#0" expanded="true" />
+                <element signature="e#5631#5632#0" expanded="true" />
+                <element signature="e#5673#5674#0" expanded="true" />
+                <element signature="e#5718#5719#0" expanded="true" />
+                <element signature="e#5751#5752#0" expanded="true" />
+                <element signature="e#5799#5800#0" expanded="true" />
+                <element signature="e#5839#5840#0" expanded="true" />
+                <element signature="e#5881#5882#0" expanded="true" />
+                <element signature="e#5950#5951#0" expanded="true" />
+                <element signature="e#5999#6000#0" expanded="true" />
+                <element signature="e#6066#6067#0" expanded="true" />
+                <element signature="e#6286#6287#0" expanded="true" />
+                <element signature="e#6329#6330#0" expanded="true" />
+                <element signature="e#9260#9261#0" expanded="true" />
+                <element signature="e#9297#9298#0" expanded="true" />
+                <element signature="e#9454#9472#0" expanded="true" />
+                <element signature="e#9677#9695#0" expanded="true" />
+                <element signature="e#10062#10080#0" expanded="true" />
+                <element signature="e#10327#10345#0" expanded="true" />
+                <element signature="e#10681#10699#0" expanded="true" />
+                <element signature="e#11009#11010#0" expanded="true" />
+                <element signature="e#11067#11068#0" expanded="true" />
+                <element signature="e#11119#11120#0" expanded="true" />
+                <element signature="e#11183#11184#0" expanded="true" />
+                <element signature="e#11239#11240#0" expanded="true" />
+                <element signature="e#11295#11296#0" expanded="true" />
+                <element signature="e#11345#11346#0" expanded="true" />
+                <element signature="e#11407#11408#0" expanded="true" />
+                <element signature="e#11460#11461#0" expanded="true" />
+                <element signature="e#11513#11514#0" expanded="true" />
+                <element signature="e#11560#11561#0" expanded="true" />
+                <element signature="e#11645#11646#0" expanded="true" />
+                <element signature="e#11696#11697#0" expanded="true" />
+                <element signature="e#11747#11748#0" expanded="true" />
+                <element signature="e#11792#11793#0" expanded="true" />
+                <element signature="e#11861#11862#0" expanded="true" />
+                <element signature="e#11916#11917#0" expanded="true" />
+                <element signature="e#11971#11972#0" expanded="true" />
+                <element signature="e#12167#12168#0" expanded="true" />
+                <element signature="e#12220#12221#0" expanded="true" />
+                <element signature="e#12267#12268#0" expanded="true" />
+                <element signature="e#12348#12349#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -421,10 +421,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AuditAction.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="AuditAction.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/plugin/src/main/java/hudson/plugins/findbugs/audit/AuditAction.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.2543641">
+            <state vertical-scroll-proportion="0.0">
               <caret line="21" column="5" selection-start-line="21" selection-start-column="5" selection-end-line="21" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -492,9 +492,9 @@
         <option value="$PROJECT_DIR$/plugin/src/main/java/hudson/plugins/findbugs/FindBugsProjectAction.java" />
         <option value="$PROJECT_DIR$/plugin/src/main/resources/hudson/plugins/findbugs/audit/FindBugsAudit/index.jelly" />
         <option value="$PROJECT_DIR$/plugin/src/main/java/hudson/plugins/findbugs/audit/AuditFingerprint.java" />
-        <option value="$PROJECT_DIR$/plugin/src/main/java/hudson/plugins/findbugs/audit/FindBugsAudit.java" />
         <option value="$PROJECT_DIR$/plugin/src/main/java/hudson/plugins/findbugs/audit/AuditPublisher.java" />
         <option value="$PROJECT_DIR$/plugin/src/main/java/hudson/plugins/findbugs/audit/AuditAction.java" />
+        <option value="$PROJECT_DIR$/plugin/src/main/java/hudson/plugins/findbugs/audit/FindBugsAudit.java" />
       </list>
     </option>
   </component>
@@ -1220,7 +1220,7 @@
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.53571427" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2391775" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32900432" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25266525" sideWeight="0.5" order="3" side_tool="false" content_ui="combo" />
@@ -1266,7 +1266,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/plugin/src/main/java/hudson/plugins/findbugs/audit/FindBugsAudit.java</url>
-          <line>97</line>
+          <line>98</line>
           <properties />
           <option name="timeStamp" value="29" />
         </line-breakpoint>
@@ -1308,25 +1308,25 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/plugin/src/main/java/hudson/plugins/findbugs/audit/FindBugsAudit.java</url>
-          <line>91</line>
+          <line>92</line>
           <properties />
           <option name="timeStamp" value="49" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/plugin/src/main/java/hudson/plugins/findbugs/audit/FindBugsAudit.java</url>
-          <line>77</line>
+          <line>78</line>
           <properties />
           <option name="timeStamp" value="51" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/plugin/src/main/java/hudson/plugins/findbugs/audit/FindBugsAudit.java</url>
-          <line>154</line>
+          <line>155</line>
           <properties />
           <option name="timeStamp" value="58" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/plugin/src/main/java/hudson/plugins/findbugs/audit/FindBugsAudit.java</url>
-          <line>158</line>
+          <line>159</line>
           <properties />
           <option name="timeStamp" value="59" />
         </line-breakpoint>
@@ -1739,57 +1739,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/plugin/src/main/java/hudson/plugins/findbugs/audit/FindBugsAudit.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="67" column="0" selection-start-line="67" selection-start-column="0" selection-end-line="67" selection-end-column="0" />
-          <folding>
-            <element signature="e#1146#1193#0" expanded="true" />
-            <element signature="e#5557#5558#0" expanded="true" />
-            <element signature="e#5599#5600#0" expanded="true" />
-            <element signature="e#5644#5645#0" expanded="true" />
-            <element signature="e#5677#5678#0" expanded="true" />
-            <element signature="e#5725#5726#0" expanded="true" />
-            <element signature="e#5765#5766#0" expanded="true" />
-            <element signature="e#5807#5808#0" expanded="true" />
-            <element signature="e#5876#5877#0" expanded="true" />
-            <element signature="e#5925#5926#0" expanded="true" />
-            <element signature="e#5992#5993#0" expanded="true" />
-            <element signature="e#6212#6213#0" expanded="true" />
-            <element signature="e#6255#6256#0" expanded="true" />
-            <element signature="e#9186#9187#0" expanded="true" />
-            <element signature="e#9223#9224#0" expanded="true" />
-            <element signature="e#9380#9398#0" expanded="true" />
-            <element signature="e#9603#9621#0" expanded="true" />
-            <element signature="e#9988#10006#0" expanded="true" />
-            <element signature="e#10253#10271#0" expanded="true" />
-            <element signature="e#10607#10625#0" expanded="true" />
-            <element signature="e#10935#10936#0" expanded="true" />
-            <element signature="e#10993#10994#0" expanded="true" />
-            <element signature="e#11045#11046#0" expanded="true" />
-            <element signature="e#11109#11110#0" expanded="true" />
-            <element signature="e#11165#11166#0" expanded="true" />
-            <element signature="e#11221#11222#0" expanded="true" />
-            <element signature="e#11271#11272#0" expanded="true" />
-            <element signature="e#11333#11334#0" expanded="true" />
-            <element signature="e#11386#11387#0" expanded="true" />
-            <element signature="e#11439#11440#0" expanded="true" />
-            <element signature="e#11486#11487#0" expanded="true" />
-            <element signature="e#11571#11572#0" expanded="true" />
-            <element signature="e#11622#11623#0" expanded="true" />
-            <element signature="e#11673#11674#0" expanded="true" />
-            <element signature="e#11718#11719#0" expanded="true" />
-            <element signature="e#11787#11788#0" expanded="true" />
-            <element signature="e#11842#11843#0" expanded="true" />
-            <element signature="e#11897#11898#0" expanded="true" />
-            <element signature="e#12093#12094#0" expanded="true" />
-            <element signature="e#12146#12147#0" expanded="true" />
-            <element signature="e#12193#12194#0" expanded="true" />
-            <element signature="e#12274#12275#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/plugin/src/main/java/hudson/plugins/findbugs/audit/AuditPublisher.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1813,12 +1762,63 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/plugin/src/main/java/hudson/plugins/findbugs/audit/AuditAction.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.2543641">
+        <state vertical-scroll-proportion="0.0">
           <caret line="21" column="5" selection-start-line="21" selection-start-column="5" selection-end-line="21" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#628#629#0" expanded="true" />
             <element signature="e#661#662#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/plugin/src/main/java/hudson/plugins/findbugs/audit/FindBugsAudit.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.16">
+          <caret line="66" column="13" selection-start-line="66" selection-start-column="13" selection-end-line="66" selection-end-column="13" />
+          <folding>
+            <element signature="e#1146#1193#0" expanded="true" />
+            <element signature="e#5631#5632#0" expanded="true" />
+            <element signature="e#5673#5674#0" expanded="true" />
+            <element signature="e#5718#5719#0" expanded="true" />
+            <element signature="e#5751#5752#0" expanded="true" />
+            <element signature="e#5799#5800#0" expanded="true" />
+            <element signature="e#5839#5840#0" expanded="true" />
+            <element signature="e#5881#5882#0" expanded="true" />
+            <element signature="e#5950#5951#0" expanded="true" />
+            <element signature="e#5999#6000#0" expanded="true" />
+            <element signature="e#6066#6067#0" expanded="true" />
+            <element signature="e#6286#6287#0" expanded="true" />
+            <element signature="e#6329#6330#0" expanded="true" />
+            <element signature="e#9260#9261#0" expanded="true" />
+            <element signature="e#9297#9298#0" expanded="true" />
+            <element signature="e#9454#9472#0" expanded="true" />
+            <element signature="e#9677#9695#0" expanded="true" />
+            <element signature="e#10062#10080#0" expanded="true" />
+            <element signature="e#10327#10345#0" expanded="true" />
+            <element signature="e#10681#10699#0" expanded="true" />
+            <element signature="e#11009#11010#0" expanded="true" />
+            <element signature="e#11067#11068#0" expanded="true" />
+            <element signature="e#11119#11120#0" expanded="true" />
+            <element signature="e#11183#11184#0" expanded="true" />
+            <element signature="e#11239#11240#0" expanded="true" />
+            <element signature="e#11295#11296#0" expanded="true" />
+            <element signature="e#11345#11346#0" expanded="true" />
+            <element signature="e#11407#11408#0" expanded="true" />
+            <element signature="e#11460#11461#0" expanded="true" />
+            <element signature="e#11513#11514#0" expanded="true" />
+            <element signature="e#11560#11561#0" expanded="true" />
+            <element signature="e#11645#11646#0" expanded="true" />
+            <element signature="e#11696#11697#0" expanded="true" />
+            <element signature="e#11747#11748#0" expanded="true" />
+            <element signature="e#11792#11793#0" expanded="true" />
+            <element signature="e#11861#11862#0" expanded="true" />
+            <element signature="e#11916#11917#0" expanded="true" />
+            <element signature="e#11971#11972#0" expanded="true" />
+            <element signature="e#12167#12168#0" expanded="true" />
+            <element signature="e#12220#12221#0" expanded="true" />
+            <element signature="e#12267#12268#0" expanded="true" />
+            <element signature="e#12348#12349#0" expanded="true" />
           </folding>
         </state>
       </provider>
