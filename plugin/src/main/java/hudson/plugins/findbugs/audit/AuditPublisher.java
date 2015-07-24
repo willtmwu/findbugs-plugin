@@ -50,17 +50,17 @@ public class AuditPublisher extends Publisher{
         //Filter based on false positives from previous audit
         BuildResult currentBuildResult = getCurrentBuildResult();
         FindBugsAudit previousAudit = getPreviousAudit();
-        int removedNumberOfAnnotationsDelta = 0;
+        Collection<FileAnnotation> deltaNumberOfAnnotationsDuringFiltering;
         if (currentBuildResult != null && previousAudit != null) {
             List<FileAnnotation> falsePositiveAnnotations = new ArrayList<FileAnnotation>();
             for (AuditFingerprint auditFingerprint : getPreviousAudit().getFalsePositiveWarnings()) {
                 falsePositiveAnnotations.add(auditFingerprint.getAnnotation());
             }
-            removedNumberOfAnnotationsDelta = falsePositiveAnnotations.size() - currentBuildResult.removeAnnotations(falsePositiveAnnotations);
+            deltaNumberOfAnnotationsDuringFiltering = currentBuildResult.removeAnnotations(falsePositiveAnnotations);
         }
 
         // Add a new audit action
-        build.addAction(new AuditAction(build, removedNumberOfAnnotationsDelta));
+        build.addAction(new AuditAction(build, deltaNumberOfAnnotationsDuringFiltering));
 
         return true;
     }

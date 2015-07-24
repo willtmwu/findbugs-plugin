@@ -50,11 +50,7 @@ public class FindBugsAudit implements ModelObject, Serializable{
     private int fixedNumberOfUnconfirmedWarnings = 0;
     private int fixedNumberOfConfirmedWarnings = 0;
 
-    public FindBugsAudit(AbstractBuild<?,?> build){
-        this(build, 0);
-    }
-
-    public FindBugsAudit(AbstractBuild<?,?> build, int deltaNumberOfAnnotationsDuringFiltering){
+    public FindBugsAudit(AbstractBuild<?,?> build, Collection<FileAnnotation> deltaNumberOfAnnotationsDuringFiltering){
         this.build = build;
         this.project = build.getProject();
         this.auditWarnings = new ArrayList<AuditFingerprint>();
@@ -62,13 +58,19 @@ public class FindBugsAudit implements ModelObject, Serializable{
         FindBugsAudit previousAudit = getReferenceAudit();
         if (previousAudit != null) {
             Collection<AuditFingerprint> referenceWarnings = previousAudit.getAllWarnings();
-            copyCurrentBuildResultAnnotations();
+            for (AuditFingerprint fingerprint : referenceWarnings) {
+                AuditFingerprint newFingerprint = new AuditFingerprint(fingerprint.getAnnotation());
+                newFingerprint.setFalsePositive(fingerprint.isFalsePositive());
+                newFingerprint.setTrackedInCloud(fingerprint.isTrackedInCloud());
+                newFingerprint.setTrackingUrl(fingerprint.getTrackingUrl());
+                this.auditWarnings.add(newFingerprint);
+            }
+
+
             for (AuditFingerprint currentFingerprint : this.auditWarnings) {
-                for (AuditFingerprint referenceFingerprint : referenceWarnings) {
-                    if (currentFingerprint.getAnnotation().equals(referenceFingerprint.getAnnotation())) {
-                        currentFingerprint.setFalsePositive(referenceFingerprint.isFalsePositive());
-                        currentFingerprint.setTrackedInCloud(referenceFingerprint.isTrackedInCloud());
-                        currentFingerprint.setTrackingUrl(referenceFingerprint.getTrackingUrl());
+                for (FileAnnotation deltaAnnotation : deltaNumberOfAnnotationsDuringFiltering) {
+                    if (currentFingerprint.getAnnotation().equals(deltaAnnotation)) {
+                        this.auditWarnings.remove(currentFingerprint);
                     }
                 }
             }
@@ -84,7 +86,7 @@ public class FindBugsAudit implements ModelObject, Serializable{
             newNumberOfUnconfirmedWarnings = newWarningsForCurrentBuild.size();
             fixedNumberOfUnconfirmedWarnings = getCurrentBuildResult().getNumberOfFixedWarnings();
             //Essentially the number that was not able to be removed because it does not exist anymore
-            fixedNumberOfConfirmedWarnings = deltaNumberOfAnnotationsDuringFiltering;
+            fixedNumberOfConfirmedWarnings = deltaNumberOfAnnotationsDuringFiltering.size();
         } else {
             copyCurrentBuildResultAnnotations();
         }

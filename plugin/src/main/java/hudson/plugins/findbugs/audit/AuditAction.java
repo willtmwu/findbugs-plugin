@@ -2,7 +2,10 @@ package hudson.plugins.findbugs.audit;
 
 import hudson.model.AbstractBuild;
 import hudson.model.Action;
+import hudson.plugins.analysis.util.model.FileAnnotation;
 import org.kohsuke.stapler.StaplerProxy;
+
+import java.util.Collection;
 
 /**
  * The action added to the side of a job page. Actual functionality of auditing and saving state is performed
@@ -23,9 +26,9 @@ public class AuditAction implements Action, StaplerProxy {
         this.auditView = new FindBugsAudit(build);
     }
 
-    public AuditAction(AbstractBuild<?,?> build, int deltaNumberOfAnnotations){
+    public AuditAction(AbstractBuild<?,?> build, Collection<FileAnnotation> deltaNumberOfAnnotationsDuringFiltering){
         this.build = build;
-        this.auditView = new FindBugsAudit(build, deltaNumberOfAnnotations);
+        this.auditView = new FindBugsAudit(build, deltaNumberOfAnnotationsDuringFiltering);
     }
 
     public FindBugsAudit getAuditView(){
