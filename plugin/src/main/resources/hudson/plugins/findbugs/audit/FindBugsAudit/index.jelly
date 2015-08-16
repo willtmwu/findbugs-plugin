@@ -193,10 +193,10 @@
 
       <j:if test="${!it.hasModifyAuditPermissions()}">
         <div>
-          *Insufficient Privileges - Auditing has been disabled
+          *Insufficient Privileges - Auditing functionality has been disabled
         </div>
         <div>
-          Operating on ${it.checkAllPermissions()}
+          Please ensure you have CONFIGURE or UPDATE permissions
         </div>
       </j:if>
 
