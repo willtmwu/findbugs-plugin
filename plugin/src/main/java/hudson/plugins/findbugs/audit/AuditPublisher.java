@@ -122,7 +122,7 @@ public class AuditPublisher extends Publisher{
     public static class DescriptorImpl extends Descriptor<Publisher> {
         @Override
         public String getDisplayName() {
-            return "Configure Findbugs Auditing";
+            return "Enable Findbugs Auditing";
         }
     }
 }

@@ -365,7 +365,7 @@ public class FindBugsAudit implements ModelObject, Serializable{
         return fixedNumberOfUnconfirmedWarnings;
     }
 
-    public String getFixedUnconfirmedTooltip(){return "Warnings no longer present in this build, and has yet been confirmed";}
+    public String getFixedUnconfirmedTooltip(){return "Warnings no longer present in this build, or has been confirmed";}
 
     public int getFixedNumberOfConfirmedWarnings(){
         return fixedNumberOfConfirmedWarnings;
