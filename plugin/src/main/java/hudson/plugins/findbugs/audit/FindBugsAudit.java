@@ -230,6 +230,7 @@ public class FindBugsAudit implements ModelObject, Serializable{
         try {
             XmlFile file = getSerializationAuditFile();
             file.write(this.auditWarnings);
+            LOGGER.log(Level.INFO, "Audit warnings serialised for build #" + this.build.number);
         } catch (IOException io){
             System.out.println(io);
         }
