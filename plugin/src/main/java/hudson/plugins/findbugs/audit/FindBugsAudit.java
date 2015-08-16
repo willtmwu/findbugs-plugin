@@ -45,7 +45,6 @@ public class FindBugsAudit implements ModelObject, Serializable{
     private boolean auditFingerprintsLoaded = false;
 
     private Collection<AuditFingerprint> auditWarnings;
-    Permission clientPermissions = Permission.UPDATE;
 
     private static final Logger LOGGER = Logger.getLogger(FindBugsAudit.class.getName());
 
@@ -175,11 +174,10 @@ public class FindBugsAudit implements ModelObject, Serializable{
     @JavaScriptMethod
     public void boundUpdateWarnings(String message){
         System.out.println("Removing annotations: [ID] " + message);
-        try {
-            this.build.checkPermission(this.clientPermissions);
+        if (hasModifyAuditPermissions()) {
             String[] stringID = message.split(", ");
             Collection<FileAnnotation> removeFalsePositives = new ArrayList<FileAnnotation>();
-            for (int i = 0; i< stringID.length ; i++){
+            for (int i = 0; i < stringID.length; i++) {
                 long annotationID = Long.parseLong(stringID[i]);
                 for (AuditFingerprint fingerprint : this.auditWarnings) {
                     if (fingerprint.getAnnotation().getKey() == annotationID) {
@@ -193,17 +191,21 @@ public class FindBugsAudit implements ModelObject, Serializable{
             serialiseAuditFingerprints();
 
             BuildResult findBugsResult = getCurrentBuildResult();
-            if(findBugsResult != null){
+            if (findBugsResult != null) {
                 findBugsResult.removeAnnotations(removeFalsePositives);
             }
-        } catch (AccessDeniedException2 e) {
-            LOGGER.log(Level.SEVERE, "Insufficient Privileges to update warnings");
         }
     }
 
     @JavaScriptMethod
     public boolean hasModifyAuditPermissions(){
-        return this.build.hasPermission(this.clientPermissions);
+        if (this.build.hasPermission(Permission.CONFIGURE) ||
+            this.build.hasPermission(Permission.UPDATE) ) {
+            return true;
+        } else {
+            return false;
+        }
+
     }
 
     @JavaScriptMethod
