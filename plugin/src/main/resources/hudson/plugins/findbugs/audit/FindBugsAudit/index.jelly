@@ -11,7 +11,7 @@
   <st:bind value="${it}" var="server"/>
   <script type="text/javascript">
     function testAlert() {
-      alert("HELP!! ME!!! THIS ANNOYING PROGREAMMING STACK");
+      alert("ALERT!!");
     }
 
     function systemLogger(message) {
@@ -112,8 +112,10 @@
           <td class="pane-header">${%Type}</td>
           <td class="pane-header">${%Category}</td>
           <j:if test="${it.hasModifyAuditPermissions()}">
-            <td class="pane-header">${%False Positive}</td>
-            <!--<td class="pane-header">${%Bugzilla Issue}</td>-->
+            <j:if test="${it.isLatestSuccessfulBuild()}">
+              <td class="pane-header">${%False Positive}</td>
+              <!--<td class="pane-header">${%Bugzilla Issue}</td>-->
+            </j:if>
           </j:if>
         </tr>
 
@@ -169,10 +171,12 @@
               </td>
 
               <j:if test="${it.hasModifyAuditPermissions()}">
-                <!--Checkbox-->
-                <td class="pane" style="text-align:center;">
-                  <input type="checkbox" id="${auditFingerprint.annotation.key}" name="unconfirmedCheckbox"/>
-                </td>
+                <j:if test="${it.isLatestSuccessfulBuild()}">
+                  <!--Checkbox-->
+                  <td class="pane" style="text-align:center;">
+                    <input type="checkbox" id="${auditFingerprint.annotation.key}" name="unconfirmedCheckbox"/>
+                  </td>
+                </j:if>
               </j:if>
 
               <!--Submit Button-->

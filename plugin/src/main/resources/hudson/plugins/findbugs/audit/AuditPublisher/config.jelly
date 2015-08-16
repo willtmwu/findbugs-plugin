@@ -2,7 +2,8 @@
 <j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define" xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form">
   <!--<f:section title="${%Findbugs Auditing}">-->
     <f:entry title="${%Details}" field="pattern"
-             description="Please ensure this is run AFTER the results of FindBugs have been published">
+             description="Please ensure this is run AFTER the results of FindBugs have been published.
+                            Furthermore, auditing is only permitted on the latest successful build">
       <!--<f:textbox />-->
     </f:entry>
 
