@@ -111,8 +111,10 @@
           <td class="pane-header">${%Rank}</td>
           <td class="pane-header">${%Type}</td>
           <td class="pane-header">${%Category}</td>
-          <td class="pane-header">${%False Positive}</td>
-          <!--<td class="pane-header">${%Bugzilla Issue}</td>-->
+          <j:if test="${it.hasModifyAuditPermissions())}">
+            <td class="pane-header">${%False Positive}</td>
+            <!--<td class="pane-header">${%Bugzilla Issue}</td>-->
+          </j:if>
         </tr>
 
         <tbody>
@@ -166,10 +168,12 @@
                 <div tooltip="${auditFingerprint.annotation.message}"> ${auditFingerprint.annotation.category} </div>
               </td>
 
-              <!--Checkbox-->
-              <td class="pane" style="text-align:center;">
-                <input type="checkbox" id="${auditFingerprint.annotation.key}" name="unconfirmedCheckbox"/>
-              </td>
+              <j:if test="${it.hasModifyAuditPermissions())}">
+                <!--Checkbox-->
+                <td class="pane" style="text-align:center;">
+                  <input type="checkbox" id="${auditFingerprint.annotation.key}" name="unconfirmedCheckbox"/>
+                </td>
+              </j:if>
 
               <!--Submit Button-->
               <!--<td class="pane" style="text-align:center;">
@@ -181,10 +185,11 @@
         </tbody>
       </table>
 
-      <j:if test="${it.isLatestSuccessfulBuild()}">
-        <button onclick="updateWarnings()" title="${it.updateSelectionButtonTooltip()}" style="float: right; margin:10px 5px 15px 20px;">Update Selection</button>
+      <j:if test="${it.hasModifyAuditPermissions())}">
+        <j:if test="${it.isLatestSuccessfulBuild()}">
+          <button onclick="updateWarnings()" title="${it.updateSelectionButtonTooltip()}" style="float: right; margin:10px 5px 15px 20px;">Update Selection</button>
+        </j:if>
       </j:if>
-
 
       <!-- CONFIRMED WARNING -->
       <h2>${%Confirmed Warnings}</h2>

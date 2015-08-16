@@ -14,17 +14,21 @@ import hudson.plugins.findbugs.FindBugsResultAction;
 
 import hudson.security.ACL;
 import hudson.security.AccessControlled;
+import hudson.security.AccessDeniedException2;
 import hudson.security.Permission;
 import jenkins.model.Jenkins;
 import org.acegisecurity.AccessDeniedException;
 import org.kohsuke.stapler.bind.JavaScriptMethod;
 import org.kohsuke.stapler.export.Exported;
 import org.kohsuke.stapler.export.ExportedBean;
+import sun.rmi.runtime.Log;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * The view will be responsible for tracking all things related to the task of auditing. Important persistent data
@@ -41,6 +45,9 @@ public class FindBugsAudit implements ModelObject, Serializable{
     private boolean auditFingerprintsLoaded = false;
 
     private Collection<AuditFingerprint> auditWarnings;
+    Permission clientPermissions = Permission.UPDATE;
+
+    private static final Logger LOGGER = Logger.getLogger(FindBugsAudit.class.getName());
 
     //For the summary table
     private int previousNumberOfUnconfirmedWarnings = 0;
@@ -168,27 +175,35 @@ public class FindBugsAudit implements ModelObject, Serializable{
     @JavaScriptMethod
     public void boundUpdateWarnings(String message){
         System.out.println("Removing annotations: [ID] " + message);
-        //Jenkins.getAuthentication().getAuthorities();
-
-        String[] stringID = message.split(", ");
-        Collection<FileAnnotation> removeFalsePositives = new ArrayList<FileAnnotation>();
-        for (int i = 0; i< stringID.length ; i++){
-            long annotationID = Long.parseLong(stringID[i]);
-            for (AuditFingerprint fingerprint : this.auditWarnings) {
-                if (fingerprint.getAnnotation().getKey() == annotationID) {
-                    fingerprint.setFalsePositive(true);
-                    removeFalsePositives.add(fingerprint.getAnnotation());
-                    newNumberOfConfirmedWarnings++;
-                    fixedNumberOfUnconfirmedWarnings++;
+        try {
+            this.build.checkPermission(this.clientPermissions);
+            String[] stringID = message.split(", ");
+            Collection<FileAnnotation> removeFalsePositives = new ArrayList<FileAnnotation>();
+            for (int i = 0; i< stringID.length ; i++){
+                long annotationID = Long.parseLong(stringID[i]);
+                for (AuditFingerprint fingerprint : this.auditWarnings) {
+                    if (fingerprint.getAnnotation().getKey() == annotationID) {
+                        fingerprint.setFalsePositive(true);
+                        removeFalsePositives.add(fingerprint.getAnnotation());
+                        newNumberOfConfirmedWarnings++;
+                        fixedNumberOfUnconfirmedWarnings++;
+                    }
                 }
             }
-        }
-        serialiseAuditFingerprints();
+            serialiseAuditFingerprints();
 
-        BuildResult findBugsResult = getCurrentBuildResult();
-        if(findBugsResult != null){
-            findBugsResult.removeAnnotations(removeFalsePositives);
+            BuildResult findBugsResult = getCurrentBuildResult();
+            if(findBugsResult != null){
+                findBugsResult.removeAnnotations(removeFalsePositives);
+            }
+        } catch (AccessDeniedException2 e) {
+            LOGGER.log(Level.SEVERE, "Insufficient Privileges to update warnings");
         }
+    }
+
+    @JavaScriptMethod
+    public boolean hasModifyAuditPermissions(){
+        return this.build.hasPermission(this.clientPermissions);
     }
 
     private void serialiseAuditFingerprints(){
@@ -208,6 +223,7 @@ public class FindBugsAudit implements ModelObject, Serializable{
                     this.auditWarnings = (Collection<AuditFingerprint>) file.read();
                     this.auditFingerprintsLoaded = true;
                     calculateWarningNumbers();
+                    LOGGER.log(Level.INFO, "FindBugsAudit, audit fingerprints loaded anc warning calculated");
                 }
                 return true;
             }
@@ -249,18 +265,6 @@ public class FindBugsAudit implements ModelObject, Serializable{
         return "findbugs.xml";
     }
 
-
-
-
-
-
-
-
-
-
-
-
-    // Stuff mainly for index.jelly
     public List<AuditFingerprint> getAllWarnings(){
         List<AuditFingerprint> warnings = new ArrayList<AuditFingerprint>(this.auditWarnings);
         Collections.sort(warnings);
@@ -326,7 +330,7 @@ public class FindBugsAudit implements ModelObject, Serializable{
     }
 
     public String getNewUnconfirmedTooltip(){
-        return "New number of warnings from build result " + getBuildNumber();
+        return "New number of warnings from build " + getBuildNumber();
     }
 
     public int getNewNumberOfConfirmedWarnings(){
@@ -341,9 +345,7 @@ public class FindBugsAudit implements ModelObject, Serializable{
         return fixedNumberOfUnconfirmedWarnings;
     }
 
-    public String getFixedUnconfirmedTooltip(){
-        return "Warnings no longer present in this build + confirmed FP by this audit";
-    }
+    public String getFixedUnconfirmedTooltip(){return "Warnings no longer present in this build, and has yet been confirmed";}
 
     public int getFixedNumberOfConfirmedWarnings(){
         return fixedNumberOfConfirmedWarnings;
@@ -353,9 +355,6 @@ public class FindBugsAudit implements ModelObject, Serializable{
         return "Confirmed false positives no longer in the current build";
     }
 
-    public String getUpdateSelectionButtonTooltip(){
-        return "Only activated on latest build, graph may update in next build";
-    }
-
+    public String getUpdateSelectionButtonTooltip(){return "Only filtered on latest build, trend graph may update in next build";}
 
 }
