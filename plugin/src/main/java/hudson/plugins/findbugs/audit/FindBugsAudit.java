@@ -206,6 +206,24 @@ public class FindBugsAudit implements ModelObject, Serializable{
         return this.build.hasPermission(this.clientPermissions);
     }
 
+    @JavaScriptMethod
+    public int checkAllPermissions(){
+        ArrayList<Permission> allPermissions = new ArrayList<Permission>();
+        allPermissions.add(Permission.READ);
+        allPermissions.add(Permission.WRITE);
+        allPermissions.add(Permission.UPDATE);
+        allPermissions.add(Permission.CONFIGURE);
+        allPermissions.add(Permission.CREATE);
+        allPermissions.add(Permission.DELETE);
+        for (Permission p : allPermissions) {
+            if (this.build.hasPermission(p)) {
+                LOGGER.log(Level.INFO, String.format("User has permission %s", p.toString()));
+            }
+        }
+        return 1;
+    }
+
+
     private void serialiseAuditFingerprints(){
         try {
             XmlFile file = getSerializationAuditFile();

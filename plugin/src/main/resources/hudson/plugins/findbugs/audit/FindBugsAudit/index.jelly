@@ -191,6 +191,15 @@
         </j:if>
       </j:if>
 
+      <j:if test="${!it.hasModifyAuditPermissions()}">
+        <div>
+          *Insufficient Privileges - Auditing has been disabled
+        </div>
+        <div>
+          Operating on ${it.checkAllPermissions()}
+        </div>
+      </j:if>
+
       <!-- CONFIRMED WARNING -->
       <h2>${%Confirmed Warnings}</h2>
       <table class="pane sortable" id="auditConfirmedWarnings">
