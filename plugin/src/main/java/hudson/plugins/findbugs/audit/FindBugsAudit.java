@@ -223,7 +223,7 @@ public class FindBugsAudit implements ModelObject, Serializable{
                     this.auditWarnings = (Collection<AuditFingerprint>) file.read();
                     this.auditFingerprintsLoaded = true;
                     calculateWarningNumbers();
-                    LOGGER.log(Level.INFO, "FindBugsAudit, audit fingerprints loaded anc warning calculated");
+                    LOGGER.log(Level.INFO, "FindBugsAudit, audit fingerprints loaded and warnings calculated for build " + this.build.number);
                 }
                 return true;
             }
